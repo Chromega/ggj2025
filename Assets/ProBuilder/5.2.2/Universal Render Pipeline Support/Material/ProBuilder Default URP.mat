@@ -31,6 +31,7 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap:
+    IgnoreProjection: False
     MotionVector: User
   disabledShaderPasses:
   - MOTIONVECTORS
