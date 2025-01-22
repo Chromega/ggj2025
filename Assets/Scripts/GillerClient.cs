@@ -1,13 +1,30 @@
 using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
+using System;
 
 public class GillerClient : NetworkBehaviour
 {
    [SerializeField]
    GillerPlayer PlayerPrefab;
 
-   // Start is called once before the first execution of Update after the MonoBehaviour is created
+   public static GillerClient Local { get; private set; }
+
+   public override void OnNetworkSpawn()
+   {
+      if (IsOwner)
+      {
+         Local = this;
+      }
+   }
+
+   public override void OnDestroy()
+   {
+      base.OnDestroy();
+      if (Local == this)
+         Local = null;
+   }
+
    void Start()
    {
       if (IsOwner)
@@ -18,11 +35,12 @@ public class GillerClient : NetworkBehaviour
          {
             var instance = Instantiate(PlayerPrefab);
             UnityEngine.Random.InitState(rand.Next());
-            float randX = Random.Range(-4f, 4f);
+            float randX = UnityEngine.Random.Range(-4f, 4f);
             instance.transform.position = Vector3.right*randX;
             var instanceNetworkObject = instance.GetComponent<NetworkObject>();
             instanceNetworkObject.Spawn();
          }
       }
    }
+
 }
