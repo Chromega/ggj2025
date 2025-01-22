@@ -1,0 +1,24 @@
+newmtl MaterialFishGreen
+Kd 0.4499872 0.9622641 0.3948914
+d 1
+
+newmtl MaterialFishGreenFin
+Kd 0.4893916 0.5943396 0.4793965
+d 1
+
+newmtl MaterialFishEyes
+Kd 0.8867924 0.8867924 0.8867924
+d 1
+
+newmtl ProBuilder_Default_URP
+Kd 1.0 1.0 1.0
+d 1.0
+
+newmtl MaterialFishGreenLips
+Kd 0.764151 0.4000979 0.4857532
+d 1
+
+newmtl MaterialFishGreenSpikes
+Kd 0.1215292 1 0
+d 1
+
