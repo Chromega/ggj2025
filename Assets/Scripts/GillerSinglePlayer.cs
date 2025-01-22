@@ -7,6 +7,7 @@ public class GillerSinglePlayer : MonoBehaviour
 
     private CharacterController controller;
 
+    //Variables for SWIMMING
     Vector3 _velocity;
 
     [SerializeField]
@@ -17,6 +18,33 @@ public class GillerSinglePlayer : MonoBehaviour
 
     [SerializeField]
     float HorizontalSwimSpeed;
+    //Variables for SWIMMING
+
+    //Variables for PUSHING
+    string obstacleTag = "Obstacle";
+    float pushForce = 2f;
+    float pushDuration = 0.2f;
+
+    Vector3 pushDirection;
+    bool isBeingPushed = false;
+    float pushTimer = 0f;
+    //Variables for PUSHING
+
+
+    //Checks to see if player has entered obstacle
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.CompareTag(obstacleTag))
+        {
+
+            pushDirection = (transform.position - other.transform.position).normalized;
+
+
+            isBeingPushed = true;
+            pushTimer = pushDuration;
+        }
+    }
 
     private void Start()
     {
@@ -27,7 +55,7 @@ public class GillerSinglePlayer : MonoBehaviour
     {
 
         float xInput = Input.GetAxis("Horizontal");
-        //float yInput = Input.GetAxis("Vertical");
+
 
         _velocity.x = xInput * HorizontalSwimSpeed;
         _velocity += new Vector3(0, SinkAcceleration, 0) * Time.deltaTime;
@@ -41,6 +69,25 @@ public class GillerSinglePlayer : MonoBehaviour
         if (newPosition.y < 0)
             newPosition.y = 0;
         transform.position = newPosition;
+
+
+        // Pushes player away from obstacle
+        if (isBeingPushed)
+        {
+
+            float pushStep = (pushForce / pushDuration) * Time.deltaTime;
+
+
+            transform.position += pushDirection * pushStep;
+
+
+            pushTimer -= Time.deltaTime;
+
+            if (pushTimer <= 0f)
+            {
+                isBeingPushed = false;
+            }
+        }
 
     }
 }
