@@ -7,6 +7,13 @@ public class GillerPlayer : NetworkBehaviour
 
    Vector3 _velocity;
    bool _isBeingPushed = false;
+   GillerPlayerInput _input;
+   public GillerPlayerInput Input
+   {
+      get { return _input; }
+      set { _input = value; }
+   }
+
    Coroutine _getPushedCoroutine;
 
    [SerializeField]
@@ -17,6 +24,8 @@ public class GillerPlayer : NetworkBehaviour
 
    [SerializeField]
    float HorizontalSwimSpeed;
+
+   Vector2 _moveInput;
 
 
 
@@ -29,29 +38,28 @@ public class GillerPlayer : NetworkBehaviour
 
       if (!_isBeingPushed)
       {
-         float xInput = Input.GetAxis("Horizontal");
-         //float yInput = Input.GetAxis("Vertical");
+         float xInput = _moveInput.x;
 
          _velocity.x = xInput * HorizontalSwimSpeed;
          _velocity += new Vector3(0, SinkAcceleration, 0) * Time.deltaTime;
-         if (Input.GetKeyDown(KeyCode.Space))
+         /*if (Input.GetKeyDown(KeyCode.Space))
          {
             _velocity.y = UpSwimBoost;
-         }
+         }*/
       }
 
       Vector3 newPosition = transform.position + _velocity * Time.deltaTime;
       if (newPosition.y < 0)
          newPosition.y = 0;
       transform.position = newPosition;
-
-      if (Input.GetKeyDown(KeyCode.F))
-      {
-         PushAway();
-      }
    }
 
-   void PushAway()
+   public void OnMoveInput(Vector2 v)
+   {
+      _moveInput = v;
+   }
+
+   public void OnAttackInput()
    {
       Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
       for (int i = 0; i < colliders.Length; i++)
@@ -68,9 +76,9 @@ public class GillerPlayer : NetworkBehaviour
    [Rpc(SendTo.Owner)]
    void ReceivePushRpc(Vector3 source)
    {
-      
+
       _velocity = (transform.position - source).normalized * 4f;
-      if (_getPushedCoroutine!=null)
+      if (_getPushedCoroutine != null)
          StopCoroutine(_getPushedCoroutine);
       _getPushedCoroutine = StartCoroutine(DoReceivePush());
    }
@@ -80,5 +88,13 @@ public class GillerPlayer : NetworkBehaviour
       _isBeingPushed = true;
       yield return new WaitForSeconds(.5f);
       _isBeingPushed = false;
+   }
+
+   public override void OnNetworkSpawn()
+   {
+      if (IsOwner)
+      {
+         GillerInputMgr.I.RegisterLocalPlayer(this);
+      }
    }
 }

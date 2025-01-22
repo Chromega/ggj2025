@@ -51,6 +51,13 @@ public class GillerNetworkMgr : MonoBehaviour
       await UnityServices.InitializeAsync();
    }
 
+
+   //Debugging!
+   private void Start()
+   {
+      //StartLocalMultiplayerSession();
+   }
+
    private void OnDestroy()
    {
       if (I == this)

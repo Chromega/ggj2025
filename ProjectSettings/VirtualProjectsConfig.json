@@ -1,4 +1,12 @@
 {
-  "PlayerTags": [],
+  "PlayerTags": [
+    "2Local",
+    "1Local_1Network_A",
+    "1Local_1Network_B",
+    "3Local",
+    "4Local",
+    "2Local_2Network_A",
+    "2Local_2Network_B"
+  ],
   "version": "1.3.3"
 }

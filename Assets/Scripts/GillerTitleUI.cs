@@ -1,3 +1,5 @@
+using System.Linq;
+using Unity.Multiplayer.Playmode;
 using UnityEngine;
 
 public class GillerTitleUI : MonoBehaviour
@@ -15,6 +17,34 @@ public class GillerTitleUI : MonoBehaviour
       PlayerCountDropdown.value = PlayerCountDropdown.options.FindIndex((x) => { return x.text == GillerNetworkMgr.I.NumLocalPlayers.ToString(); });
 
       GillerNetworkMgr.I.OnConnectionStateChanged.AddListener(OnConnectionStateChanged);
+
+      if (CurrentPlayer.ReadOnlyTags().Contains("2Local"))
+      {
+         GillerNetworkMgr.I.NumLocalPlayers = 2;
+         OnLocalMultiplayerPressed();
+      }
+      if (CurrentPlayer.ReadOnlyTags().Contains("3Local"))
+      {
+         GillerNetworkMgr.I.NumLocalPlayers = 3;
+         OnLocalMultiplayerPressed();
+      }
+      if (CurrentPlayer.ReadOnlyTags().Contains("4Local"))
+      {
+         GillerNetworkMgr.I.NumLocalPlayers = 4;
+         OnLocalMultiplayerPressed();
+      }
+      if (CurrentPlayer.ReadOnlyTags().Contains("1Local_1Network_A") || CurrentPlayer.ReadOnlyTags().Contains("1Local_1Network_B"))
+      {
+         GillerNetworkMgr.I.NumLocalPlayers = 1;
+         GillerNetworkMgr.I.RoomCode = SystemInfo.deviceName;
+         OnNetworkMultiplayerPressed();
+      }
+      if (CurrentPlayer.ReadOnlyTags().Contains("2Local_2Network_A") || CurrentPlayer.ReadOnlyTags().Contains("2Local_2Network_B"))
+      {
+         GillerNetworkMgr.I.NumLocalPlayers = 2;
+         GillerNetworkMgr.I.RoomCode = SystemInfo.deviceName;
+         OnNetworkMultiplayerPressed();
+      }
    }
 
    private void OnDestroy()
