@@ -6,6 +6,7 @@ using Unity.Services.Multiplayer;
 using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.Events;
+using System.Collections;
 
 public class GillerNetworkMgr : MonoBehaviour
 {
@@ -56,6 +57,12 @@ public class GillerNetworkMgr : MonoBehaviour
    private void Start()
    {
       //StartLocalMultiplayerSession();
+      MultiplayerService.Instance.SessionAdded += Instance_SessionAdded;
+   }
+
+   private void Instance_SessionAdded(ISession obj)
+   {
+      State = ConnectionState.Connected;
    }
 
    private void OnDestroy()
@@ -66,7 +73,11 @@ public class GillerNetworkMgr : MonoBehaviour
 
    public void StartLocalMultiplayerSession()
    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+      StartNetworkSession();
+#else
       StartLocalSessionAsync(RoomCode, UnityEngine.Random.Range(0, 1000000000).ToString());
+#endif
    }
 
    public async void StartNetworkSession()
@@ -119,7 +130,6 @@ public class GillerNetworkMgr : MonoBehaviour
          Debug.LogException(e);
       }*/
    }
-
    public async Task CreateOrJoinSessionAsync(string sessionName, string profileName)
    {
       if (string.IsNullOrEmpty(profileName) || string.IsNullOrEmpty(sessionName))

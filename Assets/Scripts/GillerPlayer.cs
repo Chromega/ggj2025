@@ -157,4 +157,29 @@ public class GillerPlayer : NetworkBehaviour
       //Temporary
       DontDestroyOnLoad(this);
    }
+   /*
+   private void OnCollisionEnter(Collision collision)
+   {
+      if (!IsOwner)
+         return;
+
+      if (_state.Value == State.Inflated)
+      {
+         GillerPlayer otherPlayer = collision.gameObject.GetComponentInParent<GillerPlayer>();
+         if (otherPlayer)
+         {
+            otherPlayer.ReceiveSpikedHitRpc(this);
+         }
+      }
+   }
+
+
+   [Rpc(SendTo.Owner)]
+   void ReceiveSpikedHitRpc(GillerPlayer source)
+   {
+      if (_state.Value != State.Inflated)
+      {
+         Debug.Log("Damaged!");
+      }
+   }*/
 }
