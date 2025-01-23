@@ -31,9 +31,19 @@ public class GillerPlayerInput : MonoBehaviour
          _player.OnMoveInput(v);
    }
 
-   public void OnAttack()
+   public void OnBlowWater()
    {
       if (_player)
-         _player.OnAttackInput();
+         _player.OnBlowWater();
+   }
+   public void OnInflate()
+   {
+      if (_player)
+         _player.OnInflate();
+   }
+   public void OnShootSpikes()
+   {
+      if (_player)
+         _player.OnShootSpikes();
    }
 }

@@ -15,9 +15,27 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
+                    "name": "BlowWater",
                     "type": "Button",
                     "id": "6c2ab1b8-8984-453a-af3d-a3c78ae1679a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Inflate",
+                    "type": "Button",
+                    "id": "83ad526a-f579-4470-8fe6-a027e80ec29a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShootSpikes",
+                    "type": "Button",
+                    "id": "e8a88bbb-887e-474f-b573-6296e9d39259",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -142,7 +160,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Attack",
+                    "action": "BlowWater",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -153,7 +171,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard WASD",
-                    "action": "Attack",
+                    "action": "BlowWater",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -164,7 +182,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard Arrows",
-                    "action": "Attack",
+                    "action": "BlowWater",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d47f1d37-9a20-4c6e-9a35-fda095998d00",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard WASD",
+                    "action": "Inflate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ecacaad-0359-4238-821d-bd76a638f19b",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard WASD",
+                    "action": "ShootSpikes",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -107,4 +107,9 @@ public class Utl : MonoBehaviour
       }
       return outCount;
    }
+
+   public static float TimeInvariantExponentialLerpFactor(float progressPerSecond)
+   {
+      return 1-Mathf.Pow(1-progressPerSecond, Time.deltaTime);
+   }
 }
