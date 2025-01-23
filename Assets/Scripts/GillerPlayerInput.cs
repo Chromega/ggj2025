@@ -23,6 +23,8 @@ public class GillerPlayerInput : MonoBehaviour
       _input = GetComponent<PlayerInput>();
 
       GillerInputMgr.I.RegisterPlayerInput(this);
+
+      DontDestroyOnLoad(gameObject);
    }
    public void OnMove(InputValue value)
    {

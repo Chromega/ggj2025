@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  MovementSpeed: 5
+  MovementSpeed: 10
   Responsiveness: 0.5
   FishAnimator: {fileID: 1984062336244242028}
   collider: {fileID: 1267946642722879174}

@@ -199,11 +199,44 @@
                 },
                 {
                     "name": "",
+                    "id": "39c41be3-104d-44d7-b484-42cd66ce6a98",
+                    "path": "<Keyboard>/rightCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard Arrows",
+                    "action": "Inflate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c3f009b-b041-4561-afc7-49042bd1d32a",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Inflate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "8ecacaad-0359-4238-821d-bd76a638f19b",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard WASD",
+                    "action": "ShootSpikes",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f23c38c-ea8d-4625-bf6e-544d3957d607",
+                    "path": "<Keyboard>/numpad0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard Arrows",
                     "action": "ShootSpikes",
                     "isComposite": false,
                     "isPartOfComposite": false

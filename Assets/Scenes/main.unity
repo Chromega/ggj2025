@@ -2672,6 +2672,7 @@ GameObject:
   - component: {fileID: 1381076133}
   - component: {fileID: 1381076135}
   - component: {fileID: 1381076136}
+  - component: {fileID: 1381076138}
   m_Layer: 0
   m_Name: PersistentMgr
   m_TagString: Untagged
@@ -2795,7 +2796,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 1545492187}
+  m_PlayerPrefab: {fileID: 2094426635136379266, guid: 983338870dd75bd4fbde59c63df74425, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -2815,6 +2816,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 258e8ed5ed4442543a8080d11f6ab501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1381076138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381076131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517a69d721076594d83a96ff52efeec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1493746760
@@ -2892,11 +2905,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493746760}
   m_CullTransparentMesh: 1
---- !u!1 &1545492187 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2094426635136379266, guid: 983338870dd75bd4fbde59c63df74425, type: 3}
-  m_PrefabInstance: {fileID: 2123283108}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1555286264
 GameObject:
   m_ObjectHideFlags: 0

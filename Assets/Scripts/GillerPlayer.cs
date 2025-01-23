@@ -154,5 +154,7 @@ public class GillerPlayer : NetworkBehaviour
       {
          GillerInputMgr.I.RegisterLocalPlayer(this);
       }
+      //Temporary
+      DontDestroyOnLoad(this);
    }
 }
