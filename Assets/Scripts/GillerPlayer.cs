@@ -28,6 +28,16 @@ public class GillerPlayer : NetworkBehaviour
    [SerializeField]
    Transform FishRoot;
 
+   [SerializeField]
+   Transform SpikeRoot;
+
+   [Header("Audio")]
+   [SerializeField]
+   AudioClip InflateSfx;
+
+   [SerializeField]
+   AudioClip DeflateSfx;
+
    #region Synchronized State
    private NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
    #endregion
@@ -51,6 +61,8 @@ public class GillerPlayer : NetworkBehaviour
    float _targetYaw = -90;
    float _currentYaw = -90;
 
+   AudioSource _audioSource;
+
    #endregion
 
    private void Start()
@@ -58,6 +70,7 @@ public class GillerPlayer : NetworkBehaviour
       _rigidbody = GetComponent<Rigidbody>();
       _state.OnValueChanged += OnChangeState;
       collider.transform.localScale = 2 * Vector3.one;
+      _audioSource = GetComponent<AudioSource>();
    }
 
    void OnChangeState(State oldState, State newState)
@@ -66,7 +79,19 @@ public class GillerPlayer : NetworkBehaviour
          collider.transform.localScale = 4 * Vector3.one;
       else
          collider.transform.localScale = 2 * Vector3.one;
+
+      if (newState == State.Inflated)
+      {
+         _audioSource.clip = InflateSfx;
+         _audioSource.Play();
+      }
+      else if (oldState == State.Inflated)
+      {
+         _audioSource.clip = DeflateSfx;
+         _audioSource.Play();
+      }
    }
+
 
 
    // Update is called once per frame
@@ -85,8 +110,15 @@ public class GillerPlayer : NetworkBehaviour
 
    private void Update()
    {
-      _currentYaw = Mathf.Lerp(_currentYaw, _targetYaw, Utl.TimeInvariantExponentialLerpFactor(.97f));
-      FishRoot.transform.rotation = Quaternion.Euler(90, 0, _currentYaw);
+      if (IsOwner)
+      {
+         _currentYaw = Mathf.Lerp(_currentYaw, _targetYaw, Utl.TimeInvariantExponentialLerpFactor(.97f));
+         FishRoot.transform.rotation = Quaternion.Euler(90, 0, _currentYaw);
+      }
+
+      float targetSpikeScale = _state.Value == State.Inflated ? 100 : 0;
+      float currentSpikeScale = SpikeRoot.transform.localScale.x;
+      SpikeRoot.transform.localScale = Mathf.MoveTowards(currentSpikeScale, targetSpikeScale, 500.0f * Time.deltaTime)*Vector3.one;
    }
 
    public void OnMoveInput(Vector2 v)
@@ -101,6 +133,7 @@ public class GillerPlayer : NetworkBehaviour
 
    public void OnBlowWater()
    {
+      Debug.Log("blow!");
       Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
       for (int i = 0; i < colliders.Length; i++)
       {
@@ -116,6 +149,7 @@ public class GillerPlayer : NetworkBehaviour
    [Rpc(SendTo.Owner)]
    void ReceivePushRpc(Vector3 source)
    {
+      Debug.Log("Get pushed");
       _rigidbody.linearVelocity = (transform.position - source).normalized * 4f;
       if (_getPushedCoroutine != null)
          StopCoroutine(_getPushedCoroutine);
@@ -157,7 +191,7 @@ public class GillerPlayer : NetworkBehaviour
       //Temporary
       DontDestroyOnLoad(this);
    }
-   /*
+   
    private void OnCollisionEnter(Collision collision)
    {
       if (!IsOwner)
@@ -168,18 +202,18 @@ public class GillerPlayer : NetworkBehaviour
          GillerPlayer otherPlayer = collision.gameObject.GetComponentInParent<GillerPlayer>();
          if (otherPlayer)
          {
-            otherPlayer.ReceiveSpikedHitRpc(this);
+            otherPlayer.ReceiveSpikedHitRpc(NetworkObject);
          }
       }
    }
 
 
    [Rpc(SendTo.Owner)]
-   void ReceiveSpikedHitRpc(GillerPlayer source)
+   void ReceiveSpikedHitRpc(NetworkObjectReference source)
    {
       if (_state.Value != State.Inflated)
       {
          Debug.Log("Damaged!");
       }
-   }*/
+   }
 }
