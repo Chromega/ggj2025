@@ -233,6 +233,7 @@ public class GillerPlayer : NetworkBehaviour
       {
          GillerInputMgr.I.RegisterLocalPlayer(this);
       }
+      GillerPlayerMgr.I.RegisterPlayer(this);
       //Temporary
       DontDestroyOnLoad(this);
    }
@@ -259,11 +260,25 @@ public class GillerPlayer : NetworkBehaviour
       if (_state.Value != State.Inflated && IsHurt == false)
       {
          Debug.Log("Damaged!");
-            ChangeColorTemporarily();
+            ChangeColorTemporarilyRpc();
       }
    }
 
-    public void ChangeColorTemporarily()
+   [Rpc(SendTo.Owner)]
+   public void ReceiveEelHitRpc(NetworkObjectReference source)
+   {
+      if (_state.Value != State.Inflated && IsHurt == false)
+      {
+         NetworkObject o;
+         if (source.TryGet(out o))
+            ReceivePushRpc(o.transform.position);
+         Debug.Log("Damaged!");
+         ChangeColorTemporarilyRpc();
+      }
+   }
+
+   [Rpc(SendTo.Everyone)]
+   public void ChangeColorTemporarilyRpc()
     {
 
         if (TemporaryMaterial != null)
@@ -276,7 +291,7 @@ public class GillerPlayer : NetworkBehaviour
         }
     }
 
-    private IEnumerator ChangeMaterialCoroutine()
+   private IEnumerator ChangeMaterialCoroutine()
     {
         Material[] materials = FishRenderer.materials;
 
@@ -305,4 +320,13 @@ public class GillerPlayer : NetworkBehaviour
             Debug.LogWarning("Invalid material or renderer.");
         }
     }
+
+   public override void OnDestroy()
+   {
+      base.OnDestroy();
+      if (GillerPlayerMgr.I)
+         GillerPlayerMgr.I.UnregisterPlayer(this);
+      if (GillerInputMgr.I)
+         GillerInputMgr.I.UnregisterLocalPlayer(this);
+   }
 }

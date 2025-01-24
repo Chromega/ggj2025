@@ -1,7 +1,12 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public class GillerSceneMgr : Singleton<GillerSceneMgr>
 {
+   [SerializeField]
+   NetworkManager NetworkManager;
+
+   public static string sTestScene;
 
    private void Start()
    {
@@ -13,11 +18,19 @@ public class GillerSceneMgr : Singleton<GillerSceneMgr>
    {
       if (GillerNetworkMgr.I.State == GillerNetworkMgr.ConnectionState.Connected)
       {
-         Debug.Log("Checking ArtTest...");
-         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "ArtTest")
+         if (!string.IsNullOrEmpty(sTestScene))
          {
-            Debug.Log("Loading ArtTest!");
-            UnityEngine.SceneManagement.SceneManager.LoadScene("ArtTest");
+            NetworkManager.SceneManager.LoadScene(sTestScene, UnityEngine.SceneManagement.LoadSceneMode.Single);
+            sTestScene = null;
+         }
+         else
+         {
+            Debug.Log("Checking gameplay...");
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "gameplay")
+            {
+               Debug.Log("Loading gameplay!");
+               NetworkManager.SceneManager.LoadScene("gameplay", UnityEngine.SceneManagement.LoadSceneMode.Single);
+            }
          }
       }
       else if (GillerNetworkMgr.I.State == GillerNetworkMgr.ConnectionState.Disconnected)

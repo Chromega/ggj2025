@@ -18,7 +18,7 @@ public class GillerTitleUI : MonoBehaviour
 
       GillerNetworkMgr.I.OnConnectionStateChanged.AddListener(OnConnectionStateChanged);
 
-      if (CurrentPlayer.ReadOnlyTags().Contains("2Local"))
+      if (CurrentPlayer.ReadOnlyTags().Contains("2Local") || !string.IsNullOrEmpty(GillerSceneMgr.sTestScene))
       {
          GillerNetworkMgr.I.NumLocalPlayers = 2;
          OnLocalMultiplayerPressed();
