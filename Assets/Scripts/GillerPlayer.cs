@@ -31,12 +31,21 @@ public class GillerPlayer : NetworkBehaviour
    [SerializeField]
    Transform SpikeRoot;
 
+   [SerializeField]
+   ParticleSystem BlowWaterParticles;
+
    [Header("Audio")]
    [SerializeField]
    AudioClip InflateSfx;
 
    [SerializeField]
    AudioClip DeflateSfx;
+
+   [SerializeField]
+   Transform InstantFacingRoot;
+
+   [SerializeField]
+   Collider PushCollider;
 
    #region Synchronized State
    private NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
@@ -118,7 +127,7 @@ public class GillerPlayer : NetworkBehaviour
 
       float targetSpikeScale = _state.Value == State.Inflated ? 100 : 0;
       float currentSpikeScale = SpikeRoot.transform.localScale.x;
-      SpikeRoot.transform.localScale = Mathf.MoveTowards(currentSpikeScale, targetSpikeScale, 500.0f * Time.deltaTime)*Vector3.one;
+      SpikeRoot.transform.localScale = Mathf.MoveTowards(currentSpikeScale, targetSpikeScale, 500.0f * Time.deltaTime) * Vector3.one;
    }
 
    public void OnMoveInput(Vector2 v)
@@ -126,18 +135,34 @@ public class GillerPlayer : NetworkBehaviour
       _moveInput = v;
 
       if (_moveInput.x < 0)
+      {
          _targetYaw = 90;
+         InstantFacingRoot.transform.localRotation = Quaternion.Euler(0, 180, 0);
+      }
       else if (_moveInput.x > 0)
+      {
+
          _targetYaw = 270;
+         InstantFacingRoot.transform.localRotation = Quaternion.Euler(0, 0, 0);
+      }
    }
 
    public void OnBlowWater()
    {
-      Debug.Log("blow!");
-      Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
-      for (int i = 0; i < colliders.Length; i++)
+      DoBlowFxRpc(_targetYaw > 180);
+      Collider[] outColliders;
+      float[] outDistances;
+      Vector3[] outDirections;
+
+      int count = Utl.OverlapCollider(PushCollider, out outColliders, out outDistances, out outDirections);
+      Debug.Log(count);
+      for (int i = 0; i < count; i++)
       {
-         Collider c = colliders[i];
+         Collider c = outColliders[i];
+         if (c.isTrigger)
+         {
+            continue;
+         }
          GillerPlayer gp = c.GetComponentInParent<GillerPlayer>();
          if (gp && gp != this)
          {
@@ -146,11 +171,18 @@ public class GillerPlayer : NetworkBehaviour
       }
    }
 
+   [Rpc(SendTo.Everyone)]
+   void DoBlowFxRpc(bool right)
+   {
+      InstantFacingRoot.transform.localRotation = Quaternion.Euler(0, right ? 0 : 180, 0);
+      BlowWaterParticles.Play();
+   }
+
    [Rpc(SendTo.Owner)]
    void ReceivePushRpc(Vector3 source)
    {
       Debug.Log("Get pushed");
-      _rigidbody.linearVelocity = (transform.position - source).normalized * 4f;
+      _rigidbody.linearVelocity = (transform.position - source).normalized * 20f;
       if (_getPushedCoroutine != null)
          StopCoroutine(_getPushedCoroutine);
       _getPushedCoroutine = StartCoroutine(DoReceivePush());
@@ -191,7 +223,7 @@ public class GillerPlayer : NetworkBehaviour
       //Temporary
       DontDestroyOnLoad(this);
    }
-   
+
    private void OnCollisionEnter(Collision collision)
    {
       if (!IsOwner)
