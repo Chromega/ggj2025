@@ -52,7 +52,7 @@ public class GillerPlayer : NetworkBehaviour
     Material TemporaryMaterial;
 
     [SerializeField]
-    float duration = 0.5f;
+    float duration = 0.05f;
 
     Material OriginalMaterial;
 
@@ -285,13 +285,19 @@ public class GillerPlayer : NetworkBehaviour
             IsHurt = true;
             OriginalMaterial = materials[1];
 
-            materials[1] = TemporaryMaterial;
-            FishRenderer.materials = materials;
+            for (int i = 0; i < 4; i++)
+            {
+                materials[1] = TemporaryMaterial;
+                FishRenderer.materials = materials;
 
-            yield return new WaitForSeconds(duration);
+                yield return new WaitForSeconds(duration);
 
-            materials[1] = OriginalMaterial;
-            FishRenderer.materials = materials;
+                materials[1] = OriginalMaterial;
+                FishRenderer.materials = materials;
+
+                yield return new WaitForSeconds(duration);
+
+            }
             IsHurt = false;
         }
         else

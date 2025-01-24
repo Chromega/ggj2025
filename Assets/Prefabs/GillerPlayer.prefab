@@ -5060,6 +5060,7 @@ MonoBehaviour:
   InstantFacingRoot: {fileID: 8326898618025379338}
   PushCollider: {fileID: 1350674014327991514}
   TemporaryMaterial: {fileID: 2100000, guid: 788621fd895ce7f479c3d2e765ac0a55, type: 2}
+  duration: 0.1
   FishRenderer: {fileID: 5452386835802303870}
 --- !u!54 &2382114625884244401
 Rigidbody:
@@ -5071,7 +5072,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
