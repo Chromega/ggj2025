@@ -3,7 +3,37 @@ guid: 9197d66f74373432885d98a2fdb42c09
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialEel
+    second: {fileID: 2100000, guid: 59ed9102320994410bd86195a89c09ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialFishEyes.001
+    second: {fileID: 2100000, guid: d22aedcdec39d44b887fab993a6b635f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialFishEyes.002
+    second: {fileID: 2100000, guid: 2b6cffff3d96c47029aa6e14d520b961, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialFishEyes.003
+    second: {fileID: 2100000, guid: d22aedcdec39d44b887fab993a6b635f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialFishEyes.004
+    second: {fileID: 2100000, guid: 2b6cffff3d96c47029aa6e14d520b961, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MaterialTeeth
+    second: {fileID: 2100000, guid: c1cff8311676a4175b8ad8236229be39, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
