@@ -47,8 +47,22 @@ public class GillerPlayer : NetworkBehaviour
    [SerializeField]
    Collider PushCollider;
 
-   #region Synchronized State
-   private NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
+    [Header("Damage")]
+    [SerializeField]
+    Material TemporaryMaterial;
+
+    [SerializeField]
+    float duration = 0.5f;
+
+    Material OriginalMaterial;
+
+    [SerializeField]
+    Renderer FishRenderer;
+
+    bool IsHurt = false;
+
+    #region Synchronized State
+    private NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
    #endregion
    //Local state
 
@@ -80,7 +94,7 @@ public class GillerPlayer : NetworkBehaviour
       _state.OnValueChanged += OnChangeState;
       collider.transform.localScale = 2 * Vector3.one;
       _audioSource = GetComponent<AudioSource>();
-   }
+    }
 
    void OnChangeState(State oldState, State newState)
    {
@@ -242,9 +256,47 @@ public class GillerPlayer : NetworkBehaviour
    [Rpc(SendTo.Owner)]
    void ReceiveSpikedHitRpc(NetworkObjectReference source)
    {
-      if (_state.Value != State.Inflated)
+      if (_state.Value != State.Inflated && IsHurt == false)
       {
          Debug.Log("Damaged!");
+            ChangeColorTemporarily();
       }
    }
+
+    public void ChangeColorTemporarily()
+    {
+
+        if (TemporaryMaterial != null)
+        {
+            StartCoroutine(ChangeMaterialCoroutine());
+        }
+        else
+        {
+            Debug.LogWarning("Missing Renderer or Temporary Material reference.");
+        }
+    }
+
+    private IEnumerator ChangeMaterialCoroutine()
+    {
+        Material[] materials = FishRenderer.materials;
+
+        if (materials != null)
+        {
+            IsHurt = true;
+            OriginalMaterial = materials[1];
+
+            materials[1] = TemporaryMaterial;
+            FishRenderer.materials = materials;
+
+            yield return new WaitForSeconds(duration);
+
+            materials[1] = OriginalMaterial;
+            FishRenderer.materials = materials;
+            IsHurt = false;
+        }
+        else
+        {
+            Debug.LogWarning("Invalid material or renderer.");
+        }
+    }
 }

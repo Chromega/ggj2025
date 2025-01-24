@@ -5059,6 +5059,8 @@ MonoBehaviour:
   DeflateSfx: {fileID: 8300000, guid: d08a67f4648c5414aab1381ceed616f0, type: 3}
   InstantFacingRoot: {fileID: 8326898618025379338}
   PushCollider: {fileID: 1350674014327991514}
+  TemporaryMaterial: {fileID: 2100000, guid: 788621fd895ce7f479c3d2e765ac0a55, type: 2}
+  FishRenderer: {fileID: 5452386835802303870}
 --- !u!54 &2382114625884244401
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5653,6 +5655,11 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!137 &5452386835802303870 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 92499127317972611, guid: 390040054f80e44c3ac773abf534625b, type: 3}
+  m_PrefabInstance: {fileID: 5395975939858459645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5577957703099878422 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 390040054f80e44c3ac773abf534625b, type: 3}
