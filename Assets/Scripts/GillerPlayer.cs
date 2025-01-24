@@ -235,7 +235,7 @@ public class GillerPlayer : NetworkBehaviour
       }
       GillerPlayerMgr.I.RegisterPlayer(this);
       //Temporary
-      DontDestroyOnLoad(this);
+      DontDestroyOnLoad(gameObject);
    }
 
    private void OnCollisionEnter(Collision collision)

@@ -17,7 +17,7 @@ public class GillerClient : NetworkBehaviour
          Local = this;
       }
 
-      DontDestroyOnLoad(this);
+      DontDestroyOnLoad(gameObject);
    }
 
    public override void OnDestroy()

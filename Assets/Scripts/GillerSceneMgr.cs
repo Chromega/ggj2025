@@ -14,10 +14,20 @@ public class GillerSceneMgr : Singleton<GillerSceneMgr>
       OnConnectionStateChanged();
    }
 
-   void OnConnectionStateChanged()
+   /*private void Update()
+   {
+      if (Input.GetKeyDown(KeyCode.Space))
+      {
+         NetworkManager.SceneManager.LoadScene("gameplay", UnityEngine.SceneManagement.LoadSceneMode.Single);
+      }
+   }*/
+
+   public void OnConnectionStateChanged()
    {
       if (GillerNetworkMgr.I.State == GillerNetworkMgr.ConnectionState.Connected)
       {
+         if (!NetworkManager.LocalClient.IsSessionOwner)
+            return;
          if (!string.IsNullOrEmpty(sTestScene))
          {
             NetworkManager.SceneManager.LoadScene(sTestScene, UnityEngine.SceneManagement.LoadSceneMode.Single);

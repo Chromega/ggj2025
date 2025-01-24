@@ -7,6 +7,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.Events;
 using System.Collections;
+using Unity.Networking.Transport;
 
 public class GillerNetworkMgr : MonoBehaviour
 {
@@ -198,6 +199,7 @@ public class GillerNetworkMgr : MonoBehaviour
       if (NetworkManager.LocalClientId == clientId)
       {
          Debug.Log($"Client-{clientId} is connected and can spawn {nameof(NetworkObject)}s.");
+         GillerSceneMgr.I.OnConnectionStateChanged();
       }
    }
 
