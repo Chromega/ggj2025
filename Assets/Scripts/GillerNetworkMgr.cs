@@ -88,9 +88,15 @@ public class GillerNetworkMgr : MonoBehaviour
 
    public async void StartNetworkSession()
    {
+#if UNITY_WEBGL && !UNITY_EDITOR
       LocalEditorTransport.enabled = false;
       OnlineTransport.enabled = true;
       NetworkManager.NetworkConfig.NetworkTransport = OnlineTransport;
+#else
+      LocalEditorTransport.enabled = true;
+      OnlineTransport.enabled = false;
+      NetworkManager.NetworkConfig.NetworkTransport = LocalEditorTransport;
+#endif
       await CreateOrJoinSessionAsync(RoomCode, UnityEngine.Random.Range(0, 1000000000).ToString());
    }
 

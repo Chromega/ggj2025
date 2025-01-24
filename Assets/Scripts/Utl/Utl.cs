@@ -82,10 +82,8 @@ public class Utl : MonoBehaviour
       outDirections = sOutputDirections;
 
       Bounds bounds = rbCollider.bounds;
-      Debug.Log(bounds);
 
       int count = Physics.OverlapBoxNonAlloc(bounds.center, bounds.extents, sCandidateColliders);
-      Debug.Log(count);
       for (int j = 0; j < count; ++j)
       {
          Collider possibleCollider = sCandidateColliders[j];

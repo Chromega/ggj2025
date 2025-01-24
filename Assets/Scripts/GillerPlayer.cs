@@ -155,7 +155,6 @@ public class GillerPlayer : NetworkBehaviour
       Vector3[] outDirections;
 
       int count = Utl.OverlapCollider(PushCollider, out outColliders, out outDistances, out outDirections);
-      Debug.Log(count);
       for (int i = 0; i < count; i++)
       {
          Collider c = outColliders[i];
