@@ -21,11 +21,25 @@ public class GillerPlayer : NetworkBehaviour
    }
 
    [SerializeField]
-   float MovementSpeed = 5.0f;
+   float NormalMovementSpeed = 10f;
 
    [SerializeField]
    [Range(0.0f, 1.0f)]
-   float Responsiveness = .5f;
+   float NormalResponsiveness = .9f;
+
+   [SerializeField]
+   float InflatedMovementSpeed = 2f;
+
+   [SerializeField]
+   [Range(0.0f, 1.0f)]
+   float InflatedResponsiveness = .5f;
+
+   [SerializeField]
+   float LimpMovementSpeed = 5f;
+
+   [SerializeField]
+   [Range(0.0f, 1.0f)]
+   float LimpResponsiveness = .75f;
 
    [SerializeField]
    Animator FishAnimator;
@@ -74,6 +88,11 @@ public class GillerPlayer : NetworkBehaviour
    FishSkin[] FishSkins;
 
    NetworkVariable<int> _playerIdx = new NetworkVariable<int>(0);
+
+   const float kMaxBreath = 4;
+   NetworkVariable<float> _breath = new NetworkVariable<float>(kMaxBreath);
+   const float kMaxInflation = 2;
+   NetworkVariable<float> _inflation = new NetworkVariable<float>(kMaxInflation);
 
    bool IsHurt = false;
 
@@ -128,6 +147,11 @@ public class GillerPlayer : NetworkBehaviour
          _audioSource.clip = DeflateSfx;
          _audioSource.Play();
       }
+
+      if (IsOwner)
+      {
+         FishAnimator.SetInteger("State", (int)newState);
+      }
    }
 
    void OnChangePlayerIdx(int oldState, int newState)
@@ -149,7 +173,25 @@ public class GillerPlayer : NetworkBehaviour
       _playerIdx.Value = idx;
    }
 
+   float GetMovementSpeed()
+   {
+      if (_state.Value == State.Inflated)
+         return InflatedMovementSpeed;
+      else if (_state.Value == State.Deflated)
+         return NormalMovementSpeed;
+      else
+         return LimpMovementSpeed;
+   }
 
+   float GetResponsiveness()
+   {
+      if (_state.Value == State.Inflated)
+         return InflatedResponsiveness;
+      else if (_state.Value == State.Deflated)
+         return NormalResponsiveness;
+      else
+         return LimpResponsiveness;
+   }
 
    // Update is called once per frame
    void FixedUpdate()
@@ -160,7 +202,7 @@ public class GillerPlayer : NetworkBehaviour
 
       if (!_isBeingPushed)
       {
-         _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, _moveInput * MovementSpeed, Utl.TimeInvariantExponentialLerpFactor(Responsiveness));
+         _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, _moveInput * GetMovementSpeed(), Utl.TimeInvariantExponentialLerpFactor(GetResponsiveness()));
          //_rigidbody.linearVelocity = _moveInput * 5;
       }
    }
@@ -171,6 +213,27 @@ public class GillerPlayer : NetworkBehaviour
       {
          _currentYaw = Mathf.Lerp(_currentYaw, _targetYaw, Utl.TimeInvariantExponentialLerpFactor(.97f));
          FishRoot.transform.rotation = Quaternion.Euler(90, 0, _currentYaw);
+
+         if (_state.Value == State.Limp)
+         {
+            float newBreath = _breath.Value + Time.deltaTime * 1.0f / 1.1f;
+            if (newBreath >= kMaxBreath)
+            {
+               newBreath = kMaxBreath;
+               _state.Value = State.Deflated;
+            }
+            _breath.Value = newBreath;
+         }
+         else if (_state.Value == State.Inflated)
+         {
+            float newInflation = _inflation.Value - Time.deltaTime * 1.0f / 1.1f;
+            if (newInflation <= 0)
+            {
+               newInflation = 0;
+               _state.Value = State.Deflated;
+            }
+            _inflation.Value = newInflation;
+         }
       }
 
       float targetSpikeScale = _state.Value == State.Inflated ? 100 : 0;
@@ -201,6 +264,32 @@ public class GillerPlayer : NetworkBehaviour
       Collider[] outColliders;
       float[] outDistances;
       Vector3[] outDirections;
+
+      if (_state.Value  == State.Inflated)
+      {
+         float newInflation = _inflation.Value - 1f;
+         if (newInflation < 0f)
+         {
+            newInflation = 0f;
+            _state.Value = State.Deflated;
+         }
+         _inflation.Value = newInflation;
+      }
+      else if (_state.Value == State.Deflated)
+      {
+         float newBreath = _breath.Value - 1f;
+         if (newBreath <= 0)
+         {
+            newBreath = 0;
+            _state.Value = State.Limp;
+         }
+         _breath.Value = newBreath;
+      }
+      else
+      {
+         return;
+      }
+
 
       int count = Utl.OverlapCollider(PushCollider, out outColliders, out outDistances, out outDirections);
       for (int i = 0; i < count; i++)
@@ -247,13 +336,13 @@ public class GillerPlayer : NetworkBehaviour
       if (_state.Value == State.Deflated)
       {
          _state.Value = State.Inflated;
-         FishAnimator.SetBool("Inflated", true);
+         _inflation.Value = kMaxInflation;
       }
-      else
+      /*else if (_state.Value == State.Deflated)
       {
          _state.Value = State.Deflated;
          FishAnimator.SetBool("Inflated", false);
-      }
+      }*/
    }
 
    public void OnShootSpikes()
@@ -299,7 +388,7 @@ public class GillerPlayer : NetworkBehaviour
    {
       if (_state.Value != State.Inflated && IsHurt == false)
       {
-         Debug.Log("Damaged!");
+         TakeDamage(1f);
          ChangeColorTemporarilyRpc();
       }
    }
@@ -312,7 +401,7 @@ public class GillerPlayer : NetworkBehaviour
          NetworkObject o;
          if (source.TryGet(out o))
             ReceivePushRpc(o.transform.position);
-         Debug.Log("Damaged!");
+         TakeDamage(2f);
          ChangeColorTemporarilyRpc();
       }
    }
@@ -328,6 +417,20 @@ public class GillerPlayer : NetworkBehaviour
       else
       {
          Debug.LogWarning("Missing Renderer or Temporary Material reference.");
+      }
+   }
+
+   void TakeDamage(float amount)
+   {
+      if (IsOwner)
+      {
+         float newBreath = _breath.Value - amount;
+         if (newBreath <= 0)
+         {
+            newBreath = 0f;
+            _state.Value = State.Limp;
+         }
+         _breath.Value = newBreath;
       }
    }
 
