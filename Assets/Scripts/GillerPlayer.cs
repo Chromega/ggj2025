@@ -140,6 +140,7 @@ public class GillerPlayer : NetworkBehaviour
    AudioSource _audioSource;
 
    float _breathRegenTimer = 999f;
+   float _limpTime = 0.0f;
 
    #endregion
 
@@ -167,6 +168,17 @@ public class GillerPlayer : NetworkBehaviour
       else if (oldState == State.Inflated)
       {
          GillerGameAudioMgr.SafePlay(DeflateSFX);
+      }
+
+      if (newState == State.Limp)
+      {
+         _limpTime = 0.0f;
+      }
+      else if (oldState == State.Limp)
+      {
+         Color c = AirMeter.color;
+         c.a = 1;
+         AirMeter.color = c;
       }
 
       if (IsOwner)
@@ -279,6 +291,14 @@ public class GillerPlayer : NetworkBehaviour
       AirMeter.fillAmount = _breath.Value / kMaxBreath;
       InflationMeter.fillAmount = _inflation.Value / kMaxInflation;
       InflationRoot.gameObject.SetActive(_state.Value == State.Inflated);
+      if (_state.Value == State.Limp)
+      {
+         _limpTime += Time.deltaTime;
+
+         Color c = AirMeter.color;
+         c.a = Mathf.Sin(_limpTime * 50.0f) / 2 + .5f;
+         AirMeter.color = c;
+      }
    }
 
    public void OnMoveInput(Vector2 v)
