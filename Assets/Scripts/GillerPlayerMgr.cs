@@ -8,6 +8,13 @@ public class GillerPlayerMgr : Singleton<GillerPlayerMgr>
    public void RegisterPlayer(GillerPlayer player)
    {
       _players.Add(player);
+      if (GillerGameMgr.I)
+      {
+         if (GillerGameMgr.I.IsOwner)
+         {
+            GillerGameMgr.I.RegisterPlayer(player);
+         }
+      }
    }
 
    public void UnregisterPlayer(GillerPlayer player)

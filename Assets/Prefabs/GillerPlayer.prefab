@@ -4986,7 +4986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1763247632
+  GlobalObjectIdHash: 2820302395
   InScenePlacedSourceGlobalObjectIdHash: 1527084750
   DeferredDespawnTick: 0
   Ownership: 0
@@ -5062,6 +5062,40 @@ MonoBehaviour:
   TemporaryMaterial: {fileID: 2100000, guid: 788621fd895ce7f479c3d2e765ac0a55, type: 2}
   duration: 0.1
   FishRenderer: {fileID: 5452386835802303870}
+  SpikeRenderer: {fileID: 5620710320253716441}
+  FishSkins:
+  - fishMats:
+    - {fileID: 2100000, guid: 926a46beeb7074e1f9fbd4c2f661f012, type: 2}
+    - {fileID: 2100000, guid: 7808ad721b4404fada91b851e44453d2, type: 2}
+    - {fileID: 2100000, guid: d22aedcdec39d44b887fab993a6b635f, type: 2}
+    - {fileID: 2100000, guid: 2b6cffff3d96c47029aa6e14d520b961, type: 2}
+    - {fileID: 2100000, guid: 04b9f91d6aad64e868cdf51e3f599318, type: 2}
+    spikeMats:
+    - {fileID: 2100000, guid: ec79cac9ab7cb42fabe8dcbbed852f98, type: 2}
+  - fishMats:
+    - {fileID: 2100000, guid: 0e121f309f3bd424db1d3da11335a07a, type: 2}
+    - {fileID: 2100000, guid: 7e1bf9cb0b0874fd5ad21217d63edaec, type: 2}
+    - {fileID: 2100000, guid: d22aedcdec39d44b887fab993a6b635f, type: 2}
+    - {fileID: 2100000, guid: 2b6cffff3d96c47029aa6e14d520b961, type: 2}
+    - {fileID: 2100000, guid: 3fef5cfd3cadb4a51968adb96f3598b5, type: 2}
+    spikeMats:
+    - {fileID: 2100000, guid: 0e121f309f3bd424db1d3da11335a07a, type: 2}
+  - fishMats:
+    - {fileID: 2100000, guid: d03632b04397e4ff59fe8e9cf3546896, type: 2}
+    - {fileID: 2100000, guid: d3a7a8ccc7cbc4966a2ffe8b17ee29f8, type: 2}
+    - {fileID: 2100000, guid: d22aedcdec39d44b887fab993a6b635f, type: 2}
+    - {fileID: 2100000, guid: 2b6cffff3d96c47029aa6e14d520b961, type: 2}
+    - {fileID: 2100000, guid: 6ed719d1e2b414592a7490efc5f7b1f0, type: 2}
+    spikeMats:
+    - {fileID: 2100000, guid: bd0f61c6fcedf4a4baf42c0fe103d910, type: 2}
+  - fishMats:
+    - {fileID: 2100000, guid: f292e7047f037486ab521b76703b3d4a, type: 2}
+    - {fileID: 2100000, guid: 72af182dfd23a45b5af2271d3adc2955, type: 2}
+    - {fileID: 2100000, guid: d22aedcdec39d44b887fab993a6b635f, type: 2}
+    - {fileID: 2100000, guid: 2b6cffff3d96c47029aa6e14d520b961, type: 2}
+    - {fileID: 2100000, guid: a20e009996d694075acaa4d3fda626f5, type: 2}
+    spikeMats:
+    - {fileID: 2100000, guid: 8ba0c6bfa715948f0b606395a6ac60b6, type: 2}
 --- !u!54 &2382114625884244401
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5664,5 +5698,10 @@ SkinnedMeshRenderer:
 --- !u!4 &5577957703099878422 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 390040054f80e44c3ac773abf534625b, type: 3}
+  m_PrefabInstance: {fileID: 5395975939858459645}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5620710320253716441 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 352017197298166820, guid: 390040054f80e44c3ac773abf534625b, type: 3}
   m_PrefabInstance: {fileID: 5395975939858459645}
   m_PrefabAsset: {fileID: 0}

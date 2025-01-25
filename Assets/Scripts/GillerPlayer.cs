@@ -4,6 +4,13 @@ using System.Collections;
 
 public class GillerPlayer : NetworkBehaviour
 {
+   [System.Serializable]
+   public struct FishSkin
+   {
+      public Material[] fishMats;
+      public Material[] spikeMats;
+   }
+
 
    public enum State
    {
@@ -58,8 +65,18 @@ public class GillerPlayer : NetworkBehaviour
 
     [SerializeField]
     Renderer FishRenderer;
+   
+    [SerializeField]
+   Renderer SpikeRenderer;
+
+   [SerializeField]
+   FishSkin[] FishSkins;
+
+   NetworkVariable<int> _playerIdx = new NetworkVariable<int>(-1);
 
     bool IsHurt = false;
+
+    bool IsBubbled = false;
 
     #region Synchronized State
     private NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
@@ -94,6 +111,7 @@ public class GillerPlayer : NetworkBehaviour
       _state.OnValueChanged += OnChangeState;
       collider.transform.localScale = 2 * Vector3.one;
       _audioSource = GetComponent<AudioSource>();
+      _playerIdx.OnValueChanged += OnChangePlayerIdx;
     }
 
    void OnChangeState(State oldState, State newState)
@@ -113,6 +131,20 @@ public class GillerPlayer : NetworkBehaviour
          _audioSource.clip = DeflateSfx;
          _audioSource.Play();
       }
+   }
+
+   void OnChangePlayerIdx(int oldState, int newState)
+   {
+      FishSkin skin = FishSkins[newState % FishSkins.Length];
+      FishRenderer.materials = skin.fishMats;
+      SpikeRenderer.materials = skin.spikeMats;
+   }
+
+
+   [Rpc(SendTo.Owner)]
+   public void SetPlayerIdxRpc(int idx)
+   {
+      _playerIdx.Value = idx;
    }
 
 
@@ -246,7 +278,7 @@ public class GillerPlayer : NetworkBehaviour
       if (_state.Value == State.Inflated)
       {
          GillerPlayer otherPlayer = collision.gameObject.GetComponentInParent<GillerPlayer>();
-         if (otherPlayer)
+         if (otherPlayer && otherPlayer.IsHurt == false)
          {
             otherPlayer.ReceiveSpikedHitRpc(NetworkObject);
          }
@@ -320,6 +352,7 @@ public class GillerPlayer : NetworkBehaviour
             Debug.LogWarning("Invalid material or renderer.");
         }
     }
+
 
    public override void OnDestroy()
    {

@@ -209,6 +209,7 @@ public class GillerNetworkMgr : MonoBehaviour
       if (NetworkManager.LocalClient.IsSessionOwner)
       {
          Debug.Log($"Client-{NetworkManager.LocalClientId} is the session owner!");
+
       }
    }
 }
