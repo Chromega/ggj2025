@@ -18,6 +18,9 @@ public class Eel : NetworkBehaviour
 
    bool _isMirrored;
    public GameObject BreakableWall;
+   public FMODUnity.StudioEventEmitter ChompEmitter;
+
+   public FMODUnity.StudioEventEmitter WallBreakEmitter;
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created
    void Start()
@@ -51,6 +54,7 @@ public class Eel : NetworkBehaviour
          Vector3 direction = (rb.position - sourcePos).normalized;
          rb.linearVelocity = direction * 50.0f;
       }
+      WallBreakEmitter.Play();
    }
 
    // Update is called once per frame
@@ -135,6 +139,7 @@ public class Eel : NetworkBehaviour
    void AttackRpc()
    {
       _timeSinceLastAttack = 0.0f;
+      ChompEmitter.Play();
    }
 
    private void OnCollisionEnter(Collision collision)

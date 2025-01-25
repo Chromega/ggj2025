@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 936541046837573686}
   - component: {fileID: 2920563859558837772}
   - component: {fileID: 8134069297805730986}
+  - component: {fileID: 2378996034640815017}
+  - component: {fileID: 7635341954621836730}
   m_Layer: 0
   m_Name: EelRoot
   m_TagString: Untagged
@@ -72,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3178418091
+  GlobalObjectIdHash: 2681135564
   InScenePlacedSourceGlobalObjectIdHash: 3291894213
   DeferredDespawnTick: 0
   Ownership: 1
@@ -98,6 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  BreakableWall: {fileID: 0}
+  ChompEmitter: {fileID: 2378996034640815017}
+  WallBreakEmitter: {fileID: 7635341954621836730}
 --- !u!114 &936541046837573686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +181,68 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2378996034640815017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460513138914188062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1072258929
+      Data2: 1316594391
+      Data3: 1899471262
+      Data4: 247963347
+    Path: event:/SFX/Eel SFX/Eels_Chomp
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &7635341954621836730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460513138914188062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1308062434
+      Data2: 1135876292
+      Data3: 131065251
+      Data4: 817745050
+    Path: event:/SFX/Eel SFX/Eels_DestroyWalls
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &6867761309275712019
 PrefabInstance:
   m_ObjectHideFlags: 0
