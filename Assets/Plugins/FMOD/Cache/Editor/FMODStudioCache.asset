@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: FuguFury_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638733371331811697
+  lastModified: 638733393240081543
   FileSizes:
   - Name: Desktop
     Value: 924
@@ -62,7 +62,7 @@ MonoBehaviour:
   Path: FuguFury_FMOD/Build/Desktop/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 638733371337614561
+  lastModified: 638733393240071402
   FileSizes:
   - Name: Desktop
     Value: 1587904
@@ -92,7 +92,7 @@ MonoBehaviour:
   - {fileID: 5036225473639879132}
   StringsBanks:
   - {fileID: -8409415199524097461}
-  cacheTime: 638733371337614561
+  cacheTime: 638733393240081543
   cacheVersion: 131620
 --- !u!114 &369340613828391553
 MonoBehaviour:
@@ -185,7 +185,7 @@ MonoBehaviour:
   Path: FuguFury_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638733371331797699
+  lastModified: 638733393240081543
   FileSizes:
   - Name: Desktop
     Value: 1234

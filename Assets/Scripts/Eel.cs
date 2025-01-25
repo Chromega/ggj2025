@@ -73,7 +73,7 @@ public class Eel : NetworkBehaviour
             targetPitch += 10;
             targetJaw = .5f;
 
-            if (bestDistance < 20f && !stillAttacking)
+            if (bestDistance < 15f && !stillAttacking)
             {
                targetJaw = 1f;
                _networkAnimator.SetTrigger("Attack");

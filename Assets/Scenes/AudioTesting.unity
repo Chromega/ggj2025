@@ -2476,7 +2476,7 @@ MonoBehaviour:
     Path: event:/MX_Title
   Event: 
   EventPlayTrigger: 1
-  EventStopTrigger: 3
+  EventStopTrigger: 2
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
