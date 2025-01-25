@@ -170,6 +170,7 @@ public class GillerPlayer : NetworkBehaviour
    public void SetPlayerIdxRpc(int idx)
    {
       _playerIdx.Value = idx;
+      transform.position = GillerGameMgr.I.SpawnPositions[idx % GillerGameMgr.I.SpawnPositions.Length].position;
    }
 
    float GetMovementSpeed()
