@@ -46,6 +46,9 @@ public class GillerPlayer : NetworkBehaviour
 
    [SerializeField]
    float BreathRegenTimePerSegment = .5f;
+   
+   [SerializeField]
+   float InflationDecayTimePerSegment = 1.2f;
 
 
    [SerializeField]
@@ -236,7 +239,7 @@ public class GillerPlayer : NetworkBehaviour
          _breathRegenTimer += Time.deltaTime;
          if (_state.Value == State.Limp)
          {
-            float newBreath = _breath.Value + Time.deltaTime * 1.0f / 1.1f;
+            float newBreath = _breath.Value + Time.deltaTime / BreathRegenTimePerSegment;
             if (newBreath >= kMaxBreath)
             {
                newBreath = kMaxBreath;
@@ -246,7 +249,7 @@ public class GillerPlayer : NetworkBehaviour
          }
          else if (_state.Value == State.Inflated)
          {
-            float newInflation = _inflation.Value - Time.deltaTime * 1.0f / 1.1f;
+            float newInflation = _inflation.Value - Time.deltaTime / InflationDecayTimePerSegment;
             if (newInflation <= 0)
             {
                newInflation = 0;
