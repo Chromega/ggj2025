@@ -15,12 +15,12 @@ MonoBehaviour:
   Path: FuguFury_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638733371331811697
+  lastModified: 638733448830218883
   FileSizes:
   - Name: Desktop
-    Value: 924
+    Value: 1316
   Exists: 1
---- !u!114 &-512732915132206699
+--- !u!114 &-8340211116569932477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,23 +30,77 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MX_Title
+  m_Name: event:/SFX/Player SFX/Player_Blow
   m_EditorClassIdentifier: 
-  Path: event:/MX_Title
+  Path: event:/SFX/Player SFX/Player_Blow
   Guid:
-    Data1: 1811936395
-    Data2: 1091765839
-    Data3: -1269176656
-    Data4: -1109272164
+    Data1: 312901026
+    Data2: 1211431597
+    Data3: 1906754958
+    Data4: -938748700
   Banks:
-  - {fileID: -170681081475160068}
-  IsStream: 1
+  - {fileID: 8782359963519088528}
+  IsStream: 0
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 27826
+  Length: 0
+--- !u!114 &-6428177854905927552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Player SFX/Player_PinMissle
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Player SFX/Player_PinMissle
+  Guid:
+    Data1: 1412865614
+    Data2: 1237472545
+    Data3: 1906330783
+    Data4: 467292291
+  Banks:
+  - {fileID: 8782359963519088528}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2001578158700464477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Player SFX/Player_Deflate
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Player SFX/Player_Deflate
+  Guid:
+    Data1: -1347666724
+    Data2: 1158084424
+    Data3: -799671382
+    Data4: 1744240153
+  Banks:
+  - {fileID: 8782359963519088528}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-170681081475160068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +116,7 @@ MonoBehaviour:
   Path: FuguFury_FMOD/Build/Desktop/BGM.bank
   Name: BGM
   StudioPath: bank:/BGM
-  lastModified: 638733371337614561
+  lastModified: 638733448830218883
   FileSizes:
   - Name: Desktop
     Value: 1587904
@@ -83,18 +137,81 @@ MonoBehaviour:
   - {fileID: -8409415199524097461}
   - {fileID: -170681081475160068}
   - {fileID: 5036225473639879132}
+  - {fileID: 8782359963519088528}
   EditorEvents:
-  - {fileID: 2031953026552376628}
-  - {fileID: -512732915132206699}
+  - {fileID: 332398572097106930}
+  - {fileID: 7169319182992092190}
+  - {fileID: 1336251948736438440}
+  - {fileID: -6428177854905927552}
+  - {fileID: 7779096548855497663}
+  - {fileID: 5407383932763692238}
+  - {fileID: 5355454231943915542}
+  - {fileID: -8340211116569932477}
+  - {fileID: -2001578158700464477}
   EditorParameters:
   - {fileID: 4625343635183154385}
   MasterBanks:
   - {fileID: 5036225473639879132}
   StringsBanks:
   - {fileID: -8409415199524097461}
-  cacheTime: 638733371337614561
+  cacheTime: 638733448830228841
   cacheVersion: 131620
---- !u!114 &369340613828391553
+--- !u!114 &332398572097106930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BGM/MX_Battle_Layering
+  m_EditorClassIdentifier: 
+  Path: event:/BGM/MX_Battle_Layering
+  Guid:
+    Data1: 994344071
+    Data2: 1091561245
+    Data3: -1591789401
+    Data4: 1270533508
+  Banks:
+  - {fileID: -170681081475160068}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3116664056215471643}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 25600
+--- !u!114 &1336251948736438440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Eel SFX/Eels_DestroyWalls
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Eel SFX/Eels_DestroyWalls
+  Guid:
+    Data1: -1308062434
+    Data2: 1135876292
+    Data3: 131065251
+    Data4: 817745050
+  Banks:
+  - {fileID: 8782359963519088528}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3116664056215471643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,34 +235,6 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
---- !u!114 &2031953026552376628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MX_Battle_Layering
-  m_EditorClassIdentifier: 
-  Path: event:/MX_Battle_Layering
-  Guid:
-    Data1: 994344071
-    Data2: 1091561245
-    Data3: -1591789401
-    Data4: 1270533508
-  Banks:
-  - {fileID: -170681081475160068}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 369340613828391553}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 25600
 --- !u!114 &4625343635183154385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,8 +274,136 @@ MonoBehaviour:
   Path: FuguFury_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638733371331797699
+  lastModified: 638733393240081543
   FileSizes:
   - Name: Desktop
     Value: 1234
+  Exists: 1
+--- !u!114 &5355454231943915542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Eel SFX/Eels_Chomp
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Eel SFX/Eels_Chomp
+  Guid:
+    Data1: -1072258929
+    Data2: 1316594391
+    Data3: 1899471262
+    Data4: 247963347
+  Banks:
+  - {fileID: 8782359963519088528}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5407383932763692238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Player SFX/Player_Inflate
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Player SFX/Player_Inflate
+  Guid:
+    Data1: -1450474865
+    Data2: 1265700508
+    Data3: 74609854
+    Data4: 174212446
+  Banks:
+  - {fileID: 8782359963519088528}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7169319182992092190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BGM/MX_Title
+  m_EditorClassIdentifier: 
+  Path: event:/BGM/MX_Title
+  Guid:
+    Data1: 1811936395
+    Data2: 1091765839
+    Data3: -1269176656
+    Data4: -1109272164
+  Banks:
+  - {fileID: -170681081475160068}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 27826
+--- !u!114 &7779096548855497663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Player SFX/Player_TakeDamage
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Player SFX/Player_TakeDamage
+  Guid:
+    Data1: 132196217
+    Data2: 1108823094
+    Data3: 1714423429
+    Data4: 2098486806
+  Banks:
+  - {fileID: 8782359963519088528}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8782359963519088528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: FuguFury_FMOD/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638733448830228841
+  FileSizes:
+  - Name: Desktop
+    Value: 233280
   Exists: 1

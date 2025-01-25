@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Netcode;
 using Unity.Netcode.Components;
@@ -24,19 +25,29 @@ public class Eel : NetworkBehaviour
       _animator = GetComponent<Animator>();
       _networkAnimator = GetComponent<NetworkAnimator>();
       _isMirrored = transform.localScale.x < 0;
-      StartCoroutine(EmergeCoroutine());
+
+      GillerGameMgr.I.OnGameStateChanged.AddListener(OnGameStateChanged);
+   }
+
+   private void OnGameStateChanged(GillerGameMgr.GameState state)
+   {
+      if (state == GillerGameMgr.GameState.Playing)
+      {
+         StartCoroutine(EmergeCoroutine());
+      }
    }
 
    IEnumerator EmergeCoroutine()
    {
       yield return new WaitForSeconds(5f);
+
       if (IsOwner)
          _animator.SetBool("Emerged", true);
 
       foreach (Rigidbody rb in BreakableWall.GetComponentsInChildren<Rigidbody>())
       {
          rb.isKinematic = false;
-         Vector3 sourcePos = transform.position + 2*Vector3.right * (_isMirrored ? 1 : -1);
+         Vector3 sourcePos = transform.position + 2 * Vector3.right * (_isMirrored ? 1 : -1);
          Vector3 direction = (rb.position - sourcePos).normalized;
          rb.linearVelocity = direction * 50.0f;
       }
@@ -68,7 +79,7 @@ public class Eel : NetworkBehaviour
          if (_targetPlayer && bestDistance < 30f)
          {
             Vector3 displacement = (_targetPlayer.transform.position - transform.position);
-            displacement.x *= _isMirrored?-1:1;
+            displacement.x *= _isMirrored ? -1 : 1;
             targetPitch = Mathf.Atan2(displacement.y, displacement.x) * Mathf.Rad2Deg;
             targetPitch += 10;
             targetJaw = .5f;
