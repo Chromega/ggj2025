@@ -56,13 +56,6 @@ public class GillerPlayer : NetworkBehaviour
    [SerializeField]
    ParticleSystem BlowWaterParticles;
 
-   [Header("Audio")]
-   [SerializeField]
-   AudioClip InflateSfx;
-
-   [SerializeField]
-   AudioClip DeflateSfx;
-
    [SerializeField]
    Transform InstantFacingRoot;
 
@@ -86,6 +79,13 @@ public class GillerPlayer : NetworkBehaviour
 
    [SerializeField]
    FishSkin[] FishSkins;
+
+   [Header("SFX")]
+   public FMODUnity.StudioEventEmitter InflateSFX;
+   public FMODUnity.StudioEventEmitter DeflateSFX;
+   public FMODUnity.StudioEventEmitter BlowSFX;
+   public FMODUnity.StudioEventEmitter MissileSFX;
+   public FMODUnity.StudioEventEmitter DamagedSFX;
 
    #region Synchronized State
    NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
@@ -138,13 +138,11 @@ public class GillerPlayer : NetworkBehaviour
 
       if (newState == State.Inflated)
       {
-         _audioSource.clip = InflateSfx;
-         _audioSource.Play();
+         InflateSFX.Play();
       }
       else if (oldState == State.Inflated)
       {
-         _audioSource.clip = DeflateSfx;
-         _audioSource.Play();
+         DeflateSFX.Play();
       }
 
       if (IsOwner)
@@ -310,6 +308,7 @@ public class GillerPlayer : NetworkBehaviour
    [Rpc(SendTo.Everyone)]
    void DoBlowFxRpc(bool right)
    {
+      BlowSFX.Play();
       InstantFacingRoot.transform.localRotation = Quaternion.Euler(0, right ? 0 : 180, 0);
       BlowWaterParticles.Play();
    }
@@ -409,7 +408,7 @@ public class GillerPlayer : NetworkBehaviour
    [Rpc(SendTo.Everyone)]
    public void ChangeColorTemporarilyRpc()
    {
-
+      DamagedSFX.Play();
       if (TemporaryMaterial != null)
       {
          StartCoroutine(ChangeMaterialCoroutine());
