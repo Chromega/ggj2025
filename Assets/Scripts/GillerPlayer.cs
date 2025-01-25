@@ -42,6 +42,13 @@ public class GillerPlayer : NetworkBehaviour
    float LimpResponsiveness = .75f;
 
    [SerializeField]
+   float BreathRegenDelay = .3f;
+
+   [SerializeField]
+   float BreathRegenTimePerSegment = .5f;
+
+
+   [SerializeField]
    Animator FishAnimator;
 
    [SerializeField]
@@ -127,6 +134,8 @@ public class GillerPlayer : NetworkBehaviour
    float _currentYaw = -90;
 
    AudioSource _audioSource;
+
+   float _breathRegenTimer = 999f;
 
    #endregion
 
@@ -220,6 +229,7 @@ public class GillerPlayer : NetworkBehaviour
          _currentYaw = Mathf.Lerp(_currentYaw, _targetYaw, Utl.TimeInvariantExponentialLerpFactor(.97f));
          FishRoot.transform.rotation = Quaternion.Euler(90, 0, _currentYaw);
 
+         _breathRegenTimer += Time.deltaTime;
          if (_state.Value == State.Limp)
          {
             float newBreath = _breath.Value + Time.deltaTime * 1.0f / 1.1f;
@@ -239,6 +249,19 @@ public class GillerPlayer : NetworkBehaviour
                _state.Value = State.Deflated;
             }
             _inflation.Value = newInflation;
+         }
+         else if (_state.Value == State.Deflated)
+         {
+            if (_breathRegenTimer > BreathRegenDelay)
+            {
+               if (_breath.Value < kMaxBreath)
+               {
+                  float newBreath = _breath.Value + Time.deltaTime / BreathRegenTimePerSegment;
+                  if (newBreath > kMaxBreath)
+                     newBreath = kMaxBreath;
+                  _breath.Value = newBreath;
+               }
+            }
          }
       }
 
@@ -270,11 +293,6 @@ public class GillerPlayer : NetworkBehaviour
 
    public void OnBlowWater()
    {
-      DoBlowFxRpc(_targetYaw > 180);
-      Collider[] outColliders;
-      float[] outDistances;
-      Vector3[] outDirections;
-
       if (_state.Value == State.Inflated)
       {
          float newInflation = _inflation.Value - 1f;
@@ -284,6 +302,7 @@ public class GillerPlayer : NetworkBehaviour
             _state.Value = State.Deflated;
          }
          _inflation.Value = newInflation;
+         _breathRegenTimer = 0;
       }
       else if (_state.Value == State.Deflated)
       {
@@ -294,11 +313,17 @@ public class GillerPlayer : NetworkBehaviour
             _state.Value = State.Limp;
          }
          _breath.Value = newBreath;
+         _breathRegenTimer = 0;
       }
       else
       {
          return;
       }
+
+      DoBlowFxRpc(_targetYaw > 180);
+      Collider[] outColliders;
+      float[] outDistances;
+      Vector3[] outDirections;
 
 
       int count = Utl.OverlapCollider(PushCollider, out outColliders, out outDistances, out outDirections);
@@ -442,6 +467,7 @@ public class GillerPlayer : NetworkBehaviour
             _state.Value = State.Limp;
          }
          _breath.Value = newBreath;
+         _breathRegenTimer = 0;
       }
    }
 
