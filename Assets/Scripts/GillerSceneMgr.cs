@@ -16,11 +16,16 @@ public class GillerSceneMgr : Singleton<GillerSceneMgr>
 
    /*private void Update()
    {
-      if (Input.GetKeyDown(KeyCode.Space))
+      if (Input.GetKeyDown(KeyCode.R))
       {
          NetworkManager.SceneManager.LoadScene("gameplay", UnityEngine.SceneManagement.LoadSceneMode.Single);
       }
    }*/
+
+   public void RestartGame()
+   {
+      NetworkManager.SceneManager.LoadScene("gameplay", UnityEngine.SceneManagement.LoadSceneMode.Single);
+   }
 
    public void OnConnectionStateChanged()
    {
@@ -43,7 +48,7 @@ public class GillerSceneMgr : Singleton<GillerSceneMgr>
             }
          }
       }
-      /*
+      
       else if (GillerNetworkMgr.I.State == GillerNetworkMgr.ConnectionState.Disconnected)
       {
          Debug.Log("Checking Main...");
@@ -52,6 +57,6 @@ public class GillerSceneMgr : Singleton<GillerSceneMgr>
             UnityEngine.SceneManagement.SceneManager.LoadScene("main");
             Debug.Log("Loading Main!");
          }
-      }*/
+      }
    }
 }

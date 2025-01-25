@@ -5,8 +5,6 @@ using System;
 
 public class GillerClient : NetworkBehaviour
 {
-   [SerializeField]
-   GillerPlayer PlayerPrefab;
 
    public static GillerClient Local { get; private set; }
 
@@ -27,7 +25,7 @@ public class GillerClient : NetworkBehaviour
          Local = null;
    }
 
-   void Start()
+   /*void Start()
    {
       if (IsOwner)
       {
@@ -43,6 +41,6 @@ public class GillerClient : NetworkBehaviour
             instanceNetworkObject.Spawn();
          }
       }
-   }
+   }*/
 
 }

@@ -42,6 +42,16 @@ public class GillerPlayer : NetworkBehaviour
    float LimpResponsiveness = .75f;
 
    [SerializeField]
+   float BreathRegenDelay = .3f;
+
+   [SerializeField]
+   float BreathRegenTimePerSegment = .5f;
+   
+   [SerializeField]
+   float InflationDecayTimePerSegment = 1.2f;
+
+
+   [SerializeField]
    Animator FishAnimator;
 
    [SerializeField]
@@ -55,13 +65,6 @@ public class GillerPlayer : NetworkBehaviour
 
    [SerializeField]
    ParticleSystem BlowWaterParticles;
-
-   [Header("Audio")]
-   [SerializeField]
-   AudioClip InflateSfx;
-
-   [SerializeField]
-   AudioClip DeflateSfx;
 
    [SerializeField]
    Transform InstantFacingRoot;
@@ -87,9 +90,25 @@ public class GillerPlayer : NetworkBehaviour
    [SerializeField]
    FishSkin[] FishSkins;
 
+   [Header("SFX")]
+   public FMODUnity.StudioEventEmitter InflateSFX;
+   public FMODUnity.StudioEventEmitter DeflateSFX;
+   public FMODUnity.StudioEventEmitter BlowSFX;
+   public FMODUnity.StudioEventEmitter MissileSFX;
+   public FMODUnity.StudioEventEmitter DamagedSFX;
+
+   [Header("UI")]
+   [SerializeField]
+   UnityEngine.UI.Image AirMeter;
+   [SerializeField]
+   UnityEngine.UI.Image InflationMeter;
+   [SerializeField]
+   GameObject InflationRoot;
+
    #region Synchronized State
    NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
-   NetworkVariable<int> _playerIdx = new NetworkVariable<int>(0);
+   public NetworkVariable<int> _playerIdx = new NetworkVariable<int>(0);
+   public NetworkVariable<int> _localInputIdx = new NetworkVariable<int>(0);
    const float kMaxBreath = 4;
    NetworkVariable<float> _breath = new NetworkVariable<float>(kMaxBreath);
    const float kMaxInflation = 2;
@@ -120,6 +139,9 @@ public class GillerPlayer : NetworkBehaviour
 
    AudioSource _audioSource;
 
+   float _breathRegenTimer = 999f;
+   float _limpTime = 0.0f;
+
    #endregion
 
    private void Start()
@@ -127,6 +149,9 @@ public class GillerPlayer : NetworkBehaviour
       _rigidbody = GetComponent<Rigidbody>();
       collider.transform.localScale = 2 * Vector3.one;
       _audioSource = GetComponent<AudioSource>();
+
+
+      NetworkManager.SceneManager.OnUnload += SceneManager_OnUnload;
    }
 
    void OnChangeState(State oldState, State newState)
@@ -138,13 +163,22 @@ public class GillerPlayer : NetworkBehaviour
 
       if (newState == State.Inflated)
       {
-         _audioSource.clip = InflateSfx;
-         _audioSource.Play();
+         GillerGameAudioMgr.SafePlay(InflateSFX);
       }
       else if (oldState == State.Inflated)
       {
-         _audioSource.clip = DeflateSfx;
-         _audioSource.Play();
+         GillerGameAudioMgr.SafePlay(DeflateSFX);
+      }
+
+      if (newState == State.Limp)
+      {
+         _limpTime = 0.0f;
+      }
+      else if (oldState == State.Limp)
+      {
+         Color c = AirMeter.color;
+         c.a = 1;
+         AirMeter.color = c;
       }
 
       if (IsOwner)
@@ -214,9 +248,10 @@ public class GillerPlayer : NetworkBehaviour
          _currentYaw = Mathf.Lerp(_currentYaw, _targetYaw, Utl.TimeInvariantExponentialLerpFactor(.97f));
          FishRoot.transform.rotation = Quaternion.Euler(90, 0, _currentYaw);
 
+         _breathRegenTimer += Time.deltaTime;
          if (_state.Value == State.Limp)
          {
-            float newBreath = _breath.Value + Time.deltaTime * 1.0f / 1.1f;
+            float newBreath = _breath.Value + Time.deltaTime / BreathRegenTimePerSegment;
             if (newBreath >= kMaxBreath)
             {
                newBreath = kMaxBreath;
@@ -226,7 +261,7 @@ public class GillerPlayer : NetworkBehaviour
          }
          else if (_state.Value == State.Inflated)
          {
-            float newInflation = _inflation.Value - Time.deltaTime * 1.0f / 1.1f;
+            float newInflation = _inflation.Value - Time.deltaTime / InflationDecayTimePerSegment;
             if (newInflation <= 0)
             {
                newInflation = 0;
@@ -234,11 +269,36 @@ public class GillerPlayer : NetworkBehaviour
             }
             _inflation.Value = newInflation;
          }
+         else if (_state.Value == State.Deflated)
+         {
+            if (_breathRegenTimer > BreathRegenDelay)
+            {
+               if (_breath.Value < kMaxBreath)
+               {
+                  float newBreath = _breath.Value + Time.deltaTime / BreathRegenTimePerSegment;
+                  if (newBreath > kMaxBreath)
+                     newBreath = kMaxBreath;
+                  _breath.Value = newBreath;
+               }
+            }
+         }
       }
 
       float targetSpikeScale = _state.Value == State.Inflated ? 100 : 0;
       float currentSpikeScale = SpikeRoot.transform.localScale.x;
       SpikeRoot.transform.localScale = Mathf.MoveTowards(currentSpikeScale, targetSpikeScale, 500.0f * Time.deltaTime) * Vector3.one;
+
+      AirMeter.fillAmount = _breath.Value / kMaxBreath;
+      InflationMeter.fillAmount = _inflation.Value / kMaxInflation;
+      InflationRoot.gameObject.SetActive(_state.Value == State.Inflated);
+      if (_state.Value == State.Limp)
+      {
+         _limpTime += Time.deltaTime;
+
+         Color c = AirMeter.color;
+         c.a = Mathf.Sin(_limpTime * 50.0f) / 2 + .5f;
+         AirMeter.color = c;
+      }
    }
 
    public void OnMoveInput(Vector2 v)
@@ -260,11 +320,6 @@ public class GillerPlayer : NetworkBehaviour
 
    public void OnBlowWater()
    {
-      DoBlowFxRpc(_targetYaw > 180);
-      Collider[] outColliders;
-      float[] outDistances;
-      Vector3[] outDirections;
-
       if (_state.Value == State.Inflated)
       {
          float newInflation = _inflation.Value - 1f;
@@ -274,6 +329,7 @@ public class GillerPlayer : NetworkBehaviour
             _state.Value = State.Deflated;
          }
          _inflation.Value = newInflation;
+         _breathRegenTimer = 0;
       }
       else if (_state.Value == State.Deflated)
       {
@@ -284,11 +340,17 @@ public class GillerPlayer : NetworkBehaviour
             _state.Value = State.Limp;
          }
          _breath.Value = newBreath;
+         _breathRegenTimer = 0;
       }
       else
       {
          return;
       }
+
+      DoBlowFxRpc(_targetYaw > 180);
+      Collider[] outColliders;
+      float[] outDistances;
+      Vector3[] outDirections;
 
 
       int count = Utl.OverlapCollider(PushCollider, out outColliders, out outDistances, out outDirections);
@@ -310,6 +372,7 @@ public class GillerPlayer : NetworkBehaviour
    [Rpc(SendTo.Everyone)]
    void DoBlowFxRpc(bool right)
    {
+      GillerGameAudioMgr.SafePlay(BlowSFX);
       InstantFacingRoot.transform.localRotation = Quaternion.Euler(0, right ? 0 : 180, 0);
       BlowWaterParticles.Play();
    }
@@ -355,16 +418,15 @@ public class GillerPlayer : NetworkBehaviour
       _playerIdx.OnValueChanged += OnChangePlayerIdx;
       _state.OnValueChanged += OnChangeState;
 
-      if (IsOwner)
-      {
-         GillerInputMgr.I.RegisterLocalPlayer(this);
-      }
       GillerPlayerMgr.I.RegisterPlayer(this);
 
       RefreshPlayerSkin();
+   }
 
-      //Temporary
-      DontDestroyOnLoad(gameObject);
+   private void SceneManager_OnUnload(ulong clientId, string sceneName, AsyncOperation asyncOperation)
+   {
+      if (IsOwner)
+         NetworkObject.Despawn(true);
    }
 
    private void OnCollisionEnter(Collision collision)
@@ -398,18 +460,20 @@ public class GillerPlayer : NetworkBehaviour
    {
       if (_state.Value != State.Inflated && IsHurt == false)
       {
-         NetworkObject o;
+         /*NetworkObject o;
          if (source.TryGet(out o))
             ReceivePushRpc(o.transform.position);
          TakeDamage(2f);
-         ChangeColorTemporarilyRpc();
+         ChangeColorTemporarilyRpc();*/
+
+         NetworkObject.Despawn(true);
       }
    }
 
    [Rpc(SendTo.Everyone)]
    public void ChangeColorTemporarilyRpc()
    {
-
+      GillerGameAudioMgr.SafePlay(DamagedSFX);
       if (TemporaryMaterial != null)
       {
          StartCoroutine(ChangeMaterialCoroutine());
@@ -431,6 +495,7 @@ public class GillerPlayer : NetworkBehaviour
             _state.Value = State.Limp;
          }
          _breath.Value = newBreath;
+         _breathRegenTimer = 0;
       }
    }
 
@@ -470,7 +535,8 @@ public class GillerPlayer : NetworkBehaviour
       base.OnDestroy();
       if (GillerPlayerMgr.I)
          GillerPlayerMgr.I.UnregisterPlayer(this);
-      if (GillerInputMgr.I)
-         GillerInputMgr.I.UnregisterLocalPlayer(this);
+
+      if (NetworkManager!=null && NetworkManager.SceneManager!=null)
+         NetworkManager.SceneManager.OnUnload -= SceneManager_OnUnload;
    }
 }
