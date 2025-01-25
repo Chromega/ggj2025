@@ -104,7 +104,8 @@ public class GillerPlayer : NetworkBehaviour
 
    #region Synchronized State
    NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
-   NetworkVariable<int> _playerIdx = new NetworkVariable<int>(0);
+   public NetworkVariable<int> _playerIdx = new NetworkVariable<int>(0);
+   public NetworkVariable<int> _localInputIdx = new NetworkVariable<int>(0);
    const float kMaxBreath = 4;
    NetworkVariable<float> _breath = new NetworkVariable<float>(kMaxBreath);
    const float kMaxInflation = 2;
@@ -144,6 +145,9 @@ public class GillerPlayer : NetworkBehaviour
       _rigidbody = GetComponent<Rigidbody>();
       collider.transform.localScale = 2 * Vector3.one;
       _audioSource = GetComponent<AudioSource>();
+
+
+      NetworkManager.SceneManager.OnUnload += SceneManager_OnUnload;
    }
 
    void OnChangeState(State oldState, State newState)
@@ -155,11 +159,11 @@ public class GillerPlayer : NetworkBehaviour
 
       if (newState == State.Inflated)
       {
-         InflateSFX.Play();
+         GillerGameAudioMgr.SafePlay(InflateSFX);
       }
       else if (oldState == State.Inflated)
       {
-         DeflateSFX.Play();
+         GillerGameAudioMgr.SafePlay(DeflateSFX);
       }
 
       if (IsOwner)
@@ -345,7 +349,7 @@ public class GillerPlayer : NetworkBehaviour
    [Rpc(SendTo.Everyone)]
    void DoBlowFxRpc(bool right)
    {
-      BlowSFX.Play();
+      GillerGameAudioMgr.SafePlay(BlowSFX);
       InstantFacingRoot.transform.localRotation = Quaternion.Euler(0, right ? 0 : 180, 0);
       BlowWaterParticles.Play();
    }
@@ -391,16 +395,15 @@ public class GillerPlayer : NetworkBehaviour
       _playerIdx.OnValueChanged += OnChangePlayerIdx;
       _state.OnValueChanged += OnChangeState;
 
-      if (IsOwner)
-      {
-         GillerInputMgr.I.RegisterLocalPlayer(this);
-      }
       GillerPlayerMgr.I.RegisterPlayer(this);
 
       RefreshPlayerSkin();
+   }
 
-      //Temporary
-      DontDestroyOnLoad(gameObject);
+   private void SceneManager_OnUnload(ulong clientId, string sceneName, AsyncOperation asyncOperation)
+   {
+      if (IsOwner)
+         NetworkObject.Despawn(true);
    }
 
    private void OnCollisionEnter(Collision collision)
@@ -445,7 +448,7 @@ public class GillerPlayer : NetworkBehaviour
    [Rpc(SendTo.Everyone)]
    public void ChangeColorTemporarilyRpc()
    {
-      DamagedSFX.Play();
+      GillerGameAudioMgr.SafePlay(DamagedSFX);
       if (TemporaryMaterial != null)
       {
          StartCoroutine(ChangeMaterialCoroutine());
@@ -507,7 +510,8 @@ public class GillerPlayer : NetworkBehaviour
       base.OnDestroy();
       if (GillerPlayerMgr.I)
          GillerPlayerMgr.I.UnregisterPlayer(this);
-      if (GillerInputMgr.I)
-         GillerInputMgr.I.UnregisterLocalPlayer(this);
+
+      if (NetworkManager!=null && NetworkManager.SceneManager!=null)
+         NetworkManager.SceneManager.OnUnload -= SceneManager_OnUnload;
    }
 }

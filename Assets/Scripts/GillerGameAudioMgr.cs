@@ -16,7 +16,12 @@ public class GillerGameAudioMgr : MonoBehaviour
    {
       if (state == GillerGameMgr.GameState.Playing)
       {
-         BattleBgmEmitter.Play();
+         SafePlay(BattleBgmEmitter);
       }
+   }
+
+   public static void SafePlay(FMODUnity.StudioEventEmitter emitter)
+   {
+      try { emitter.Play(); } catch { }
    }
 }

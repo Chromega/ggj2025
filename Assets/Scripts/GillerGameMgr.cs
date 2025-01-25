@@ -1,15 +1,20 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.XR;
 
 public class GillerGameMgr : NetworkBehaviour
 {
 
    public static GillerGameMgr I { get; private set; }
 
+
    NetworkVariable<int> playerCount = new NetworkVariable<int>(0);
+   const int kMaxPlayers = 4;
 
    public Transform[] SpawnPositions;
 
@@ -27,6 +32,7 @@ public class GillerGameMgr : NetworkBehaviour
    private void Awake()
    {
       I = this;
+      Debug.Log("Awake");
    }
 
 
@@ -34,22 +40,53 @@ public class GillerGameMgr : NetworkBehaviour
    {
       return _state.Value;
    }
-
+   /*
    public void RegisterPlayer(GillerPlayer gp)
    {
       gp.SetPlayerIdxRpc(playerCount.Value);
       playerCount.Value = playerCount.Value + 1;
+   }*/
+
+
+
+   [Rpc(SendTo.Server)]
+   public void RequestPlayerSpawnRpc(ulong clientId, int inputId)
+   {
+      Debug.Log("Received spawn request");
+      if (_state.Value != GameState.Lobby)
+         return;
+
+      if (playerCount.Value < kMaxPlayers)
+      {
+         //client.ReceivePlayerAssignmentRpc(playerCount.Value, inputId);
+         //playerCount.Value = playerCount.Value + 1;
+
+         int id = playerCount.Value;
+
+         GillerPlayer instance = Instantiate(GillerPlayerMgr.I.PlayerPrefab);
+         instance.transform.position = SpawnPositions[id].position;
+         instance._playerIdx.Value = id;
+         instance._localInputIdx.Value = inputId;
+         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
+         if (clientId == NetworkManager.LocalClientId)
+         {
+            instanceNetworkObject.Spawn();
+         }
+         else
+         {
+            instanceNetworkObject.SpawnWithOwnership(clientId);
+         }
+
+         playerCount.Value = playerCount.Value + 1;
+      }
    }
 
    public override void OnNetworkSpawn()
    {
-      if (IsOwner)
-      {
-         foreach (GillerPlayer gp in GillerPlayerMgr.I.GetPlayers())
-            RegisterPlayer(gp);
-      }
-
+      Debug.Log("Spawned");
       _state.OnValueChanged += OnChangeState;
+
+      GillerPlayerMgr.I.SpawnPlayers();
    }
 
    private void OnChangeState(GameState previousValue, GameState newValue)

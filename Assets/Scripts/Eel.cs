@@ -54,7 +54,7 @@ public class Eel : NetworkBehaviour
          Vector3 direction = (rb.position - sourcePos).normalized;
          rb.linearVelocity = direction * 50.0f;
       }
-      WallBreakEmitter.Play();
+      GillerGameAudioMgr.SafePlay(WallBreakEmitter);
    }
 
    // Update is called once per frame
@@ -139,7 +139,7 @@ public class Eel : NetworkBehaviour
    void AttackRpc()
    {
       _timeSinceLastAttack = 0.0f;
-      ChompEmitter.Play();
+      GillerGameAudioMgr.SafePlay(ChompEmitter);
    }
 
    private void OnCollisionEnter(Collision collision)

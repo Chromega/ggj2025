@@ -14,13 +14,13 @@ public class GillerSceneMgr : Singleton<GillerSceneMgr>
       OnConnectionStateChanged();
    }
 
-   /*private void Update()
+   private void Update()
    {
-      if (Input.GetKeyDown(KeyCode.Space))
+      if (Input.GetKeyDown(KeyCode.R))
       {
          NetworkManager.SceneManager.LoadScene("gameplay", UnityEngine.SceneManagement.LoadSceneMode.Single);
       }
-   }*/
+   }
 
    public void OnConnectionStateChanged()
    {

@@ -15,7 +15,6 @@ public class GillerInputMgr : Singleton<GillerInputMgr>
    bool _hasArrowsPlayer;
 
    List<GillerPlayerInput> _playersInputs = new List<GillerPlayerInput>();
-   List<GillerPlayer> _localPlayers = new List<GillerPlayer>();
 
    private void Start()
    {
@@ -69,45 +68,13 @@ public class GillerInputMgr : Singleton<GillerInputMgr>
    {
       _playersInputs.Add(playerInput);
 
-      UpdateInputAssignments();
-   }
 
-   public void RegisterLocalPlayer(GillerPlayer player)
-   {
-      _localPlayers.Add(player);
-      UpdateInputAssignments();
-   }
 
-   public void UnregisterLocalPlayer(GillerPlayer player)
-   {
-      _localPlayers.Remove(player);
-      for (int i = 0; i < _playersInputs.Count; i++)
+      if (GillerPlayerMgr.I)
       {
-         if (_playersInputs[i].Player == player)
-         {
-            _playersInputs[i].Player = null;
-         }
-      }
-      UpdateInputAssignments();
-   }
-
-   void UpdateInputAssignments()
-   {
-      Debug.Log("Assignments updated");
-      for (int i = 0; i < _playersInputs.Count; ++i)
-      {
-         if (_playersInputs[i].Player == null)
-         {
-            for (int j = 0; j < _localPlayers.Count; ++j)
-            {
-               if (_localPlayers[j].Input == null)
-               {
-                  _playersInputs[i].Player = _localPlayers[j];
-                  Debug.Log("Made an assignment!");
-                  break;
-               }
-            }
-         }
+         GillerPlayerMgr.I.OnPlayerInputAdded(playerInput);
       }
    }
+
+   public List<GillerPlayerInput> GetPlayerInputs() { return _playersInputs; }
 }

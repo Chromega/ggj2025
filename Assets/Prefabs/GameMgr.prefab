@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9011873980465865347}
   - component: {fileID: 7410466625260382314}
   - component: {fileID: 6610195855562086165}
+  - component: {fileID: 2967196573817295942}
   m_Layer: 0
   m_Name: GameMgr
   m_TagString: Untagged
@@ -79,3 +80,16 @@ MonoBehaviour:
   OnGameStateChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2967196573817295942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258266839917683513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88051cbb9f522b94097fc37a0e4dc8b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: 5962073200300331054, guid: 769c3c9768a073e46855e79f17d267e1, type: 3}
