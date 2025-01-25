@@ -48,7 +48,7 @@ public class GillerSceneMgr : Singleton<GillerSceneMgr>
             }
          }
       }
-      /*
+      
       else if (GillerNetworkMgr.I.State == GillerNetworkMgr.ConnectionState.Disconnected)
       {
          Debug.Log("Checking Main...");
@@ -57,6 +57,6 @@ public class GillerSceneMgr : Singleton<GillerSceneMgr>
             UnityEngine.SceneManagement.SceneManager.LoadScene("main");
             Debug.Log("Loading Main!");
          }
-      }*/
+      }
    }
 }
