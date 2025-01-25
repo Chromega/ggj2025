@@ -15,7 +15,6 @@ public class GillerNetworkMgr : MonoBehaviour
 
    public NetworkManager NetworkManager;
    public string RoomCode;
-   public int NumLocalPlayers;
    ISession m_Session;
 
    public NetworkTransport LocalEditorTransport;
@@ -50,8 +49,6 @@ public class GillerNetworkMgr : MonoBehaviour
 
       NetworkManager.OnSessionOwnerPromoted += OnSessionOwnerPromoted;
       NetworkManager.OnClientConnectedCallback += OnClientConnectedCallback;
-
-      RoomCode = UnityEngine.Random.Range(0, 9999).ToString("0000");
 
       await UnityServices.InitializeAsync();
    }
@@ -148,11 +145,19 @@ public class GillerNetworkMgr : MonoBehaviour
    }
    public async Task CreateOrJoinSessionAsync(string sessionName, string profileName)
    {
+
+      if (string.IsNullOrEmpty(sessionName))
+      {
+         RoomCode = UnityEngine.Random.Range(0, 9999).ToString("0000");
+         sessionName = RoomCode;
+      }
       if (string.IsNullOrEmpty(profileName) || string.IsNullOrEmpty(sessionName))
       {
          Debug.LogError("Please provide a player and session name, to login.");
          return;
       }
+
+      Debug.Log("Session name is " + sessionName);
 
       State = ConnectionState.Connecting;
       try

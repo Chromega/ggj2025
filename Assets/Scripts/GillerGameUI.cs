@@ -7,6 +7,7 @@ public class GillerGameUI : MonoBehaviour
    public TMPro.TextMeshProUGUI pressSpaceLabel;
    public TMPro.TextMeshProUGUI numberLabel;
    public TMPro.TextMeshProUGUI gameOverLabel;
+   public TMPro.TextMeshProUGUI roomCodeLabel;
    public Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -16,6 +17,7 @@ public class GillerGameUI : MonoBehaviour
       {
          GillerGameMgr.I.OnGameStateChanged.AddListener(OnGameStateChanged);
          RefreshUI();
+         roomCodeLabel.text = "ROOM CODE: " + GillerNetworkMgr.I.RoomCode;
       }
     }
 
