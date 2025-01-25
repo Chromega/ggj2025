@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{dd494c1d-e4eb-46a6-a705-27608a36874f}">
+		<property name="assetPath">
+			<value>Eel_DestroyWalls.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>6.159416666666667</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{317a3a05-3198-4ef7-891c-1154c8dd119d}</destination>
+		</relationship>
+	</object>
+</objects>

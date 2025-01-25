@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{d41f7924-31d9-4a23-a12a-9488e54ad704}">
+		<property name="assetPath">
+			<value>PufferBlow_3.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.43839583333333332</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{317a3a05-3198-4ef7-891c-1154c8dd119d}</destination>
+		</relationship>
+	</object>
+</objects>
