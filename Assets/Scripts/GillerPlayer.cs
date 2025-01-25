@@ -87,6 +87,14 @@ public class GillerPlayer : NetworkBehaviour
    public FMODUnity.StudioEventEmitter MissileSFX;
    public FMODUnity.StudioEventEmitter DamagedSFX;
 
+   [Header("UI")]
+   [SerializeField]
+   UnityEngine.UI.Image AirMeter;
+   [SerializeField]
+   UnityEngine.UI.Image InflationMeter;
+   [SerializeField]
+   GameObject InflationRoot;
+
    #region Synchronized State
    NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
    NetworkVariable<int> _playerIdx = new NetworkVariable<int>(0);
@@ -237,6 +245,10 @@ public class GillerPlayer : NetworkBehaviour
       float targetSpikeScale = _state.Value == State.Inflated ? 100 : 0;
       float currentSpikeScale = SpikeRoot.transform.localScale.x;
       SpikeRoot.transform.localScale = Mathf.MoveTowards(currentSpikeScale, targetSpikeScale, 500.0f * Time.deltaTime) * Vector3.one;
+
+      AirMeter.fillAmount = _breath.Value / kMaxBreath;
+      InflationMeter.fillAmount = _inflation.Value / kMaxInflation;
+      InflationRoot.gameObject.SetActive(_state.Value == State.Inflated);
    }
 
    public void OnMoveInput(Vector2 v)
