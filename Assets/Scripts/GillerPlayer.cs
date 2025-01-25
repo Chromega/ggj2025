@@ -87,21 +87,20 @@ public class GillerPlayer : NetworkBehaviour
    [SerializeField]
    FishSkin[] FishSkins;
 
+   #region Synchronized State
+   NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
    NetworkVariable<int> _playerIdx = new NetworkVariable<int>(0);
-
    const float kMaxBreath = 4;
    NetworkVariable<float> _breath = new NetworkVariable<float>(kMaxBreath);
    const float kMaxInflation = 2;
    NetworkVariable<float> _inflation = new NetworkVariable<float>(kMaxInflation);
 
-   bool IsHurt = false;
-
-   #region Synchronized State
-   private NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
    #endregion
    //Local state
 
    #region Local State
+   bool IsBubbled = false;
+   bool IsHurt = false;
    bool _isBeingPushed = false;
    GillerPlayerInput _input;
    public GillerPlayerInput Input
@@ -265,7 +264,7 @@ public class GillerPlayer : NetworkBehaviour
       float[] outDistances;
       Vector3[] outDirections;
 
-      if (_state.Value  == State.Inflated)
+      if (_state.Value == State.Inflated)
       {
          float newInflation = _inflation.Value - 1f;
          if (newInflation < 0f)
@@ -375,7 +374,7 @@ public class GillerPlayer : NetworkBehaviour
       if (_state.Value == State.Inflated)
       {
          GillerPlayer otherPlayer = collision.gameObject.GetComponentInParent<GillerPlayer>();
-         if (otherPlayer)
+         if (otherPlayer && otherPlayer.IsHurt == false)
          {
             otherPlayer.ReceiveSpikedHitRpc(NetworkObject);
          }
@@ -463,6 +462,7 @@ public class GillerPlayer : NetworkBehaviour
          Debug.LogWarning("Invalid material or renderer.");
       }
    }
+
 
    public override void OnDestroy()
    {
