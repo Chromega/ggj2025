@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
+using UnityEngine.InputSystem.LowLevel;
 
 public class GillerPlayer : NetworkBehaviour
 {
@@ -54,30 +55,30 @@ public class GillerPlayer : NetworkBehaviour
    [SerializeField]
    Collider PushCollider;
 
-    [Header("Damage")]
-    [SerializeField]
-    Material TemporaryMaterial;
+   [Header("Damage")]
+   [SerializeField]
+   Material TemporaryMaterial;
 
-    [SerializeField]
-    float duration = 0.05f;
+   [SerializeField]
+   float duration = 0.05f;
 
-    Material OriginalMaterial;
+   Material OriginalMaterial;
 
-    [SerializeField]
-    Renderer FishRenderer;
-   
-    [SerializeField]
+   [SerializeField]
+   Renderer FishRenderer;
+
+   [SerializeField]
    Renderer SpikeRenderer;
 
    [SerializeField]
    FishSkin[] FishSkins;
 
-   NetworkVariable<int> _playerIdx = new NetworkVariable<int>(-1);
+   NetworkVariable<int> _playerIdx = new NetworkVariable<int>(0);
 
-    bool IsHurt = false;
+   bool IsHurt = false;
 
-    #region Synchronized State
-    private NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
+   #region Synchronized State
+   private NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
    #endregion
    //Local state
 
@@ -106,11 +107,9 @@ public class GillerPlayer : NetworkBehaviour
    private void Start()
    {
       _rigidbody = GetComponent<Rigidbody>();
-      _state.OnValueChanged += OnChangeState;
       collider.transform.localScale = 2 * Vector3.one;
       _audioSource = GetComponent<AudioSource>();
-      _playerIdx.OnValueChanged += OnChangePlayerIdx;
-    }
+   }
 
    void OnChangeState(State oldState, State newState)
    {
@@ -133,7 +132,12 @@ public class GillerPlayer : NetworkBehaviour
 
    void OnChangePlayerIdx(int oldState, int newState)
    {
-      FishSkin skin = FishSkins[newState % FishSkins.Length];
+      RefreshPlayerSkin();
+   }
+
+   void RefreshPlayerSkin()
+   {
+      FishSkin skin = FishSkins[_playerIdx.Value % FishSkins.Length];
       FishRenderer.materials = skin.fishMats;
       SpikeRenderer.materials = skin.spikeMats;
    }
@@ -259,11 +263,17 @@ public class GillerPlayer : NetworkBehaviour
 
    public override void OnNetworkSpawn()
    {
+      _playerIdx.OnValueChanged += OnChangePlayerIdx;
+      _state.OnValueChanged += OnChangeState;
+
       if (IsOwner)
       {
          GillerInputMgr.I.RegisterLocalPlayer(this);
       }
       GillerPlayerMgr.I.RegisterPlayer(this);
+
+      RefreshPlayerSkin();
+
       //Temporary
       DontDestroyOnLoad(gameObject);
    }
@@ -290,7 +300,7 @@ public class GillerPlayer : NetworkBehaviour
       if (_state.Value != State.Inflated && IsHurt == false)
       {
          Debug.Log("Damaged!");
-            ChangeColorTemporarilyRpc();
+         ChangeColorTemporarilyRpc();
       }
    }
 
@@ -309,47 +319,47 @@ public class GillerPlayer : NetworkBehaviour
 
    [Rpc(SendTo.Everyone)]
    public void ChangeColorTemporarilyRpc()
-    {
+   {
 
-        if (TemporaryMaterial != null)
-        {
-            StartCoroutine(ChangeMaterialCoroutine());
-        }
-        else
-        {
-            Debug.LogWarning("Missing Renderer or Temporary Material reference.");
-        }
-    }
+      if (TemporaryMaterial != null)
+      {
+         StartCoroutine(ChangeMaterialCoroutine());
+      }
+      else
+      {
+         Debug.LogWarning("Missing Renderer or Temporary Material reference.");
+      }
+   }
 
    private IEnumerator ChangeMaterialCoroutine()
-    {
-        Material[] materials = FishRenderer.materials;
+   {
+      Material[] materials = FishRenderer.materials;
 
-        if (materials != null)
-        {
-            IsHurt = true;
-            OriginalMaterial = materials[1];
+      if (materials != null)
+      {
+         IsHurt = true;
+         OriginalMaterial = materials[1];
 
-            for (int i = 0; i < 4; i++)
-            {
-                materials[1] = TemporaryMaterial;
-                FishRenderer.materials = materials;
+         for (int i = 0; i < 4; i++)
+         {
+            materials[1] = TemporaryMaterial;
+            FishRenderer.materials = materials;
 
-                yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(duration);
 
-                materials[1] = OriginalMaterial;
-                FishRenderer.materials = materials;
+            materials[1] = OriginalMaterial;
+            FishRenderer.materials = materials;
 
-                yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(duration);
 
-            }
-            IsHurt = false;
-        }
-        else
-        {
-            Debug.LogWarning("Invalid material or renderer.");
-        }
-    }
+         }
+         IsHurt = false;
+      }
+      else
+      {
+         Debug.LogWarning("Invalid material or renderer.");
+      }
+   }
 
    public override void OnDestroy()
    {
