@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{c4aba2db-00e5-49f8-8ae6-ce3f52af53ec}">
+		<property name="name">
+			<value>MX_Branching_Intensity</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d2779612-95e9-49b6-8c66-f8beadaa73ba}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{0d8b20d1-534e-4a0f-ad1d-991f9bbfb2ae}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{0d8b20d1-534e-4a0f-ad1d-991f9bbfb2ae}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

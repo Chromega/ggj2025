@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{58d0eaf9-4d61-4727-89c1-92a17f03cb39}">
+		<property name="name">
+			<value>MX_Layering_Intensity</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d2779612-95e9-49b6-8c66-f8beadaa73ba}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{7c5612b6-1848-4410-b249-314ac4add2dd}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{7c5612b6-1848-4410-b249-314ac4add2dd}">
+		<property name="minimum">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>2</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

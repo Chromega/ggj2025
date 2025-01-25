@@ -1,0 +1,437 @@
+[LOG] System::create                           : Header version = 2.02.24. Current version = 2.02.24.
+[LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0x0.
+[LOG] SystemI::init                            : Initialize version=20224 (146338), maxchannels=256, flags=0x00020000
+[LOG] SystemI::setOutputInternal               : Setting output to 'FMOD Core Audio Output'
+[LOG] OutputCoreAudio::init                    : Output running 2 channels at 48000Hz sample rate.
+[LOG] OutputCoreAudio::init                    : Maximum hardware read size: 512 samples, Software buffer size: 512 samples, Number of software buffers: 4.
+[LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
+[LOG] AsyncManager::init                       : manager 0x3b2c8c008 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : done
+[LOG] PlaybackSystem::init                     : 
+[LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] PlaybackSystem::init                     : done
+[LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] Manager::init                            : done.
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] Thread::initThread                       : Init FMOD nonblocking thread (0). Affinity: 0x4000000000000003, Priority: 0xFFFF7FFC, Stack Size: 114688, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x3b2395648, queue head = 0x3c0dcb228, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3b2395648
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0x3b23cc148, queue head = 0x3c0dcb228, queue count = 0
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x13173ab80
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Title', format=5, channels=2, frequency=48000, lengthbytes=430592, lengthpcm=1669565, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.637920.
+[LOG] Thread::initThread                       :     Init FMOD file thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFC, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3b2395648
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3b23cc148
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x1317cfcc0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 27826
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Title', format=5, channels=2, frequency=48000, lengthbytes=430592, lengthpcm=1669565, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.637920.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3b23cc148
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x3233363e8, queue head = 0x3c0dcb228, queue count = 0
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x3233405b8, queue head = 0x3c0dcb228, queue count = 1
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3233363e8
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x1328747a0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Title', format=5, channels=2, frequency=48000, lengthbytes=430592, lengthpcm=1669565, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.637920.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3233363e8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3233405b8
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x1328b7970
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 27826
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Title', format=5, channels=2, frequency=48000, lengthbytes=430592, lengthpcm=1669565, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.637920.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3233405b8
+[LOG] SoundI::release                          : GillerQueen_Title (0x3b23cc148)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3235de688)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x323329938)
+[LOG] SoundI::release                          : GillerQueen_Title (0x3b2395648)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3562b4218)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x323332038)
+[LOG] SoundI::release                          : GillerQueen_Title (0x3233405b8)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3b23e07a8)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3b680da88)
+[LOG] SoundI::release                          : GillerQueen_Title (0x3233363e8)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3b2357d68)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3b6837a58)
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x3233363e8, queue head = 0x3c0dcb228, queue count = 0
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x3233405b8, queue head = 0x3c0dcb228, queue count = 1
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x323332038, queue head = 0x3c0dcb228, queue count = 2
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x323329938, queue head = 0x3c0dcb228, queue count = 3
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3233363e8
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x1328747a0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x3233bbb08, queue head = 0x3c0dcb228, queue count = 3
+[LOG] SystemI::createSound                     :     filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0x3235be9e8, queue head = 0x3c0dcb228, queue count = 4
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Battle_Layering_state2_150BPM', format=5, channels=2, frequency=48000, lengthbytes=362784, lengthpcm=1382400, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.620413.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3233363e8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3233405b8
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x1328b7970
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 25600
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Battle_Layering_state1_150BPM', format=5, channels=2, frequency=48000, lengthbytes=389792, lengthpcm=1382400, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.568093.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3233405b8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x323332038
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x323324a20
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Battle_Layering_state3_150BPM - Trimmed', format=5, channels=2, frequency=48000, lengthbytes=395584, lengthpcm=1382400, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.626495.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x323332038
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x323329938
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x357380ab0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 25600
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Battle_Layering_state2_150BPM', format=5, channels=2, frequency=48000, lengthbytes=362784, lengthpcm=1382400, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.620413.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x323329938
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3233bbb08
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x3562b6130
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 25600
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Battle_Layering_state3_150BPM - Trimmed', format=5, channels=2, frequency=48000, lengthbytes=395584, lengthpcm=1382400, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.626495.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3233bbb08
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3235be9e8
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x3562dd120
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Battle_Layering_state1_150BPM', format=5, channels=2, frequency=48000, lengthbytes=389792, lengthpcm=1382400, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.568093.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3235be9e8
+[LOG] SoundI::release                          : GillerQueen_Battle_Layering_state3_150BPM - Trimmed (0x3233bbb08)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state3_150BPM - Trimmed (0x3b6861988)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state3_150BPM - Trimmed (0x3b686a028)
+[LOG] SoundI::release                          : GillerQueen_Battle_Layering_state2_150BPM (0x323329938)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state2_150BPM (0x3c0d489e8)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state2_150BPM (0x3b680da88)
+[LOG] SoundI::release                          : GillerQueen_Battle_Layering_state1_150BPM (0x3233405b8)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state1_150BPM (0x3b23e07a8)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state1_150BPM (0x3b23cc148)
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x3b23cc148, queue head = 0x3c0dcb228, queue count = 0
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x3b680da88, queue head = 0x3c0dcb228, queue count = 1
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3b23cc148
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x3b686a028, queue head = 0x3c0dcb228, queue count = 1
+[LOG] SystemI::createSound                     :     filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0x3b6833dd8, queue head = 0x3c0dcb228, queue count = 2
+[LOG] SystemI::createSound                     :     filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0x3a6e59f38, queue head = 0x3c0dcb228, queue count = 3
+[LOG] SystemI::createSound                     :     filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0x3a6e4c5f8, queue head = 0x3c0dcb228, queue count = 4
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x1317cfcc0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Battle_Layering_state2_150BPM', format=5, channels=2, frequency=48000, lengthbytes=362784, lengthpcm=1382400, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.620413.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3b23cc148
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3b680da88
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x13173ab80
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 25600
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Battle_Layering_state1_150BPM', format=5, channels=2, frequency=48000, lengthbytes=389792, lengthpcm=1382400, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.568093.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3b680da88
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3b686a028
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x3c0d96c60
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Battle_Layering_state3_150BPM - Trimmed', format=5, channels=2, frequency=48000, lengthbytes=395584, lengthpcm=1382400, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.626495.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3b686a028
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3b6833dd8
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x3c0d96dd0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 25600
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Battle_Layering_state2_150BPM', format=5, channels=2, frequency=48000, lengthbytes=362784, lengthpcm=1382400, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.620413.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3b6833dd8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3a6e59f38
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x3b2374e40
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 25600
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Battle_Layering_state3_150BPM - Trimmed', format=5, channels=2, frequency=48000, lengthbytes=395584, lengthpcm=1382400, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.626495.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3a6e59f38
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3a6e4c5f8
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x3b233b440
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Battle_Layering_state1_150BPM', format=5, channels=2, frequency=48000, lengthbytes=389792, lengthpcm=1382400, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.568093.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3a6e4c5f8
+[LOG] SoundI::release                          : GillerQueen_Battle_Layering_state1_150BPM (0x3235be9e8)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state1_150BPM (0x3b68e13b8)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state1_150BPM (0x3b6826ea8)
+[LOG] SoundI::release                          : GillerQueen_Battle_Layering_state3_150BPM - Trimmed (0x323332038)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state3_150BPM - Trimmed (0x3b237d8c8)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state3_150BPM - Trimmed (0x3b6837a58)
+[LOG] SoundI::release                          : GillerQueen_Battle_Layering_state2_150BPM (0x3233363e8)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state2_150BPM (0x3b2357d68)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state2_150BPM (0x3b2395648)
+[LOG] SoundI::release                          : GillerQueen_Battle_Layering_state1_150BPM (0x3a6e4c5f8)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state1_150BPM (0x373765918)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state1_150BPM (0x32359b3e8)
+[LOG] SoundI::release                          : GillerQueen_Battle_Layering_state3_150BPM - Trimmed (0x3a6e59f38)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state3_150BPM - Trimmed (0x3235c94f8)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state3_150BPM - Trimmed (0x3235d66e8)
+[LOG] SoundI::release                          : GillerQueen_Battle_Layering_state2_150BPM (0x3b6833dd8)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state2_150BPM (0x323588c78)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state2_150BPM (0x3235dee68)
+[LOG] SoundI::release                          : GillerQueen_Battle_Layering_state3_150BPM - Trimmed (0x3b686a028)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state3_150BPM - Trimmed (0x3235e7c48)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state3_150BPM - Trimmed (0x3233bbb08)
+[LOG] SoundI::release                          : GillerQueen_Battle_Layering_state1_150BPM (0x3b680da88)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state1_150BPM (0x323569a28)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state1_150BPM (0x323329938)
+[LOG] SoundI::release                          : GillerQueen_Battle_Layering_state2_150BPM (0x3b23cc148)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state2_150BPM (0x3562b4218)
+[LOG] SoundI::release                          :     GillerQueen_Battle_Layering_state2_150BPM (0x3233405b8)
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x3b23cc148, queue head = 0x3c0dcb228, queue count = 0
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x3b2395648, queue head = 0x3c0dcb228, queue count = 1
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3b23cc148
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x1317cfcc0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Title', format=5, channels=2, frequency=48000, lengthbytes=430592, lengthpcm=1669565, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.637920.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3b23cc148
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3b2395648
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x13173ab80
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 27826
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Title', format=5, channels=2, frequency=48000, lengthbytes=430592, lengthpcm=1669565, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.637920.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3b2395648
+[LOG] SoundI::release                          : GillerQueen_Title (0x3b2395648)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x323569a28)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x323329938)
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x10cc0bee8, queue head = 0x3c0dcb228, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x10cc0bee8
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x10cc06930
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Title', format=5, channels=2, frequency=48000, lengthbytes=430592, lengthpcm=1669565, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.637920.
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0x121718348, queue head = 0x3c0dcb228, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x10cc0bee8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x121718348
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x3b686f7b0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 27826
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Title', format=5, channels=2, frequency=48000, lengthbytes=430592, lengthpcm=1669565, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.637920.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x121718348
+[LOG] SoundI::release                          : GillerQueen_Title (0x3b23cc148)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3562b4218)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3233405b8)
+[LOG] SoundI::release                          : GillerQueen_Title (0x121718348)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3235c98a8)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3233bbb08)
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x10cc1b2c8, queue head = 0x3c0dcb228, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x10cc1b2c8
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x10cc27340
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Title', format=5, channels=2, frequency=48000, lengthbytes=430592, lengthpcm=1669565, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.637920.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x10cc1b2c8
+[LOG] SystemI::createSound                     : filename = FuguFury_FMOD/Build/Desktop/BGM.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0x3725e4f18, queue head = 0x3c0dcb228, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0x3725e4f18
+[LOG] SystemI::createSoundInternal             :     Create name='FuguFury_FMOD/Build/Desktop/BGM.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1580064
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 7840
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0x12169afc0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 27826
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='GillerQueen_Title', format=5, channels=2, frequency=48000, lengthbytes=430592, lengthpcm=1669565, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.637920.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0x3725e4f18
+[LOG] SoundI::release                          : GillerQueen_Title (0x10cc0bee8)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3235de688)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x323329938)
+[LOG] SoundI::release                          : GillerQueen_Title (0x3725e4f18)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3562b4218)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x3233bbb08)
+[LOG] SoundI::release                          : GillerQueen_Title (0x10cc1b2c8)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x10cc4b108)
+[LOG] SoundI::release                          :     GillerQueen_Title (0x10cc429f8)
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
