@@ -437,11 +437,13 @@ public class GillerPlayer : NetworkBehaviour
    {
       if (_state.Value != State.Inflated && IsHurt == false)
       {
-         NetworkObject o;
+         /*NetworkObject o;
          if (source.TryGet(out o))
             ReceivePushRpc(o.transform.position);
          TakeDamage(2f);
-         ChangeColorTemporarilyRpc();
+         ChangeColorTemporarilyRpc();*/
+
+         NetworkObject.Despawn(true);
       }
    }
 

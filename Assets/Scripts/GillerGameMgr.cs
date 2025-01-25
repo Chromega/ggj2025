@@ -15,6 +15,7 @@ public class GillerGameMgr : NetworkBehaviour
 
    NetworkVariable<int> playerCount = new NetworkVariable<int>(0);
    const int kMaxPlayers = 4;
+   int playersAtStart;
 
    public Transform[] SpawnPositions;
 
@@ -22,7 +23,8 @@ public class GillerGameMgr : NetworkBehaviour
    {
       Lobby,
       Countdown,
-      Playing
+      Playing,
+      GameOver
    }
 
    NetworkVariable<GameState> _state = new NetworkVariable<GameState>(GameState.Lobby);
@@ -91,6 +93,8 @@ public class GillerGameMgr : NetworkBehaviour
 
    private void OnChangeState(GameState previousValue, GameState newValue)
    {
+      if (previousValue == GameState.Lobby)
+         playersAtStart = GillerPlayerMgr.I.GetPlayers().Count;
       OnGameStateChanged?.Invoke(newValue);
    }
 
@@ -110,6 +114,21 @@ public class GillerGameMgr : NetworkBehaviour
          if (Input.GetKeyDown(KeyCode.Space))
          {
             StartCountdownRpc();
+         }
+      }
+      else if (_state.Value == GameState.Playing)
+      {
+         int victoryPlayers = (playersAtStart > 1) ? 1 : 0;
+         if (GillerPlayerMgr.I.GetPlayers().Count <= victoryPlayers)
+         {
+            _state.Value = GameState.GameOver;
+         }
+      }
+      else if (_state.Value == GameState.GameOver)
+      {
+         if (Input.GetKeyDown(KeyCode.Space))
+         {
+            GillerSceneMgr.I.RestartGame();
          }
       }
    }

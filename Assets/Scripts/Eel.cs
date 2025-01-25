@@ -11,7 +11,7 @@ public class Eel : NetworkBehaviour
 
    GillerPlayer _targetPlayer;
 
-
+   bool emerged;
    float _timeSinceLastAttack = 999f;
 
    float TimeBetweenAttacks = 2.0f;
@@ -55,12 +55,15 @@ public class Eel : NetworkBehaviour
          rb.linearVelocity = direction * 50.0f;
       }
       GillerGameAudioMgr.SafePlay(WallBreakEmitter);
+
+      yield return new WaitForSeconds(3.0f);
+      emerged = true;
    }
 
    // Update is called once per frame
    void Update()
    {
-      if (IsOwner)
+      if (IsOwner && emerged)
       {
          float bestDistance = Mathf.Infinity;
          GillerPlayer bestPlayer = _targetPlayer;

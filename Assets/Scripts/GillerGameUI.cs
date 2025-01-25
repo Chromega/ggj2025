@@ -6,6 +6,7 @@ public class GillerGameUI : MonoBehaviour
 {
    public TMPro.TextMeshProUGUI pressSpaceLabel;
    public TMPro.TextMeshProUGUI numberLabel;
+   public TMPro.TextMeshProUGUI gameOverLabel;
    public Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,6 +31,7 @@ public class GillerGameUI : MonoBehaviour
    void RefreshUI()
    {
       pressSpaceLabel.gameObject.SetActive(GillerGameMgr.I.GetGameState() == GillerGameMgr.GameState.Lobby);
+      gameOverLabel.gameObject.SetActive(GillerGameMgr.I.GetGameState() == GillerGameMgr.GameState.GameOver);
    }
 
    IEnumerator DoStartCountdown()
