@@ -76,6 +76,8 @@ public class GillerPlayer : NetworkBehaviour
 
     bool IsHurt = false;
 
+    bool IsBubbled = false;
+
     #region Synchronized State
     private NetworkVariable<State> _state = new NetworkVariable<State>(State.Deflated);
    #endregion
@@ -276,7 +278,7 @@ public class GillerPlayer : NetworkBehaviour
       if (_state.Value == State.Inflated)
       {
          GillerPlayer otherPlayer = collision.gameObject.GetComponentInParent<GillerPlayer>();
-         if (otherPlayer)
+         if (otherPlayer && otherPlayer.IsHurt == false)
          {
             otherPlayer.ReceiveSpikedHitRpc(NetworkObject);
          }
@@ -350,6 +352,7 @@ public class GillerPlayer : NetworkBehaviour
             Debug.LogWarning("Invalid material or renderer.");
         }
     }
+
 
    public override void OnDestroy()
    {
