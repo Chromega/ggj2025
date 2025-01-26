@@ -5787,10 +5787,11 @@ MonoBehaviour:
   LimpMovementSpeed: 6
   LimpResponsiveness: 0.7
   BreathRegenDelay: 1.1
-  BreathRegenTimePerSegment: 1.4
+  BreathRegenTimePerSegment: 0.6
   InflationDecayTimePerSegment: 1.5
-  PushConstant: 45
-  PushStunTime: 0.05
+  PushConstant: 75
+  PushStunTime: 0.1
+  SpikeDamageValue: 3
   FishAnimator: {fileID: 1984062336244242028}
   collider: {fileID: 1267946642722879174}
   FishRoot: {fileID: 5577957703099878422}

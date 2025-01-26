@@ -55,6 +55,9 @@ public class GillerPlayer : NetworkBehaviour
    
    [SerializeField]
    float PushStunTime = .05f;
+   
+   [SerializeField]
+   float SpikeDamageValue = 2f;
 
 
    [SerializeField]
@@ -463,7 +466,7 @@ public class GillerPlayer : NetworkBehaviour
    {
       if (_state.Value != State.Limp && IsHurt == false)
       {
-         TakeDamage(1f);
+         TakeDamage(SpikeDamageValue);
          ChangeColorTemporarilyRpc();
       }
    }
