@@ -437,7 +437,7 @@ public class GillerPlayer : NetworkBehaviour
 
    IEnumerator DelayedDespawn(AsyncOperation asyncOperation)
    {
-      yield return new WaitUntil(() => { return asyncOperation.isDone; });
+      //yield return new WaitUntil(() => { return asyncOperation.isDone; });
       yield return new WaitForSeconds(1.0f);
       NetworkObject.Despawn(true);
    }
