@@ -55,7 +55,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: stylish6x5 SDF Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
-  m_Parent: {fileID: 2100000, guid: e899ec95066ea41cb965834f8a435acd, type: 2}
+  m_Parent: {fileID: 2100000, guid: 9134665c739524c439f3f74868d4991f, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - UNDERLAY_ON
