@@ -8,6 +8,9 @@ public class GillerTitleUI : MonoBehaviour
    [SerializeField]
    TMPro.TMP_InputField RoomCode;
 
+   public GameObject DisconnectedRoot;
+   public GameObject ConnectingRoot;
+
    // Start is called once before the first execution of Update after the MonoBehaviour is created
    void Start()
    {
@@ -37,6 +40,8 @@ public class GillerTitleUI : MonoBehaviour
          GillerNetworkMgr.I.RoomCode = SystemInfo.deviceName;
          OnNetworkMultiplayerPressed();
       }
+
+      OnConnectionStateChanged();
    }
 
    private void OnDestroy()
@@ -64,6 +69,7 @@ public class GillerTitleUI : MonoBehaviour
 
    void OnConnectionStateChanged()
    {
-      gameObject.SetActive(GillerNetworkMgr.I.State == GillerNetworkMgr.ConnectionState.Disconnected);
+      DisconnectedRoot.SetActive(GillerNetworkMgr.I.State == GillerNetworkMgr.ConnectionState.Disconnected);
+      ConnectingRoot.SetActive(GillerNetworkMgr.I.State != GillerNetworkMgr.ConnectionState.Disconnected);
    }
 }
