@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e1401a05-9c55-434c-a994-d6ab5783e726}">
+		<property name="assetPath">
+			<value>Menu_Toggle.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.739125</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{317a3a05-3198-4ef7-891c-1154c8dd119d}</destination>
+		</relationship>
+	</object>
+</objects>
