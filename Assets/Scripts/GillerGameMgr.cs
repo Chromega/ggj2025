@@ -136,10 +136,10 @@ public class GillerGameMgr : NetworkBehaviour
          {
             GillerSceneMgr.I.RestartGame();
          }
-         else if (Input.GetKeyDown(KeyCode.Escape))
+         /*else if (Input.GetKeyDown(KeyCode.Escape))
          {
             GillerNetworkMgr.I.Disconnect();
-         }
+         }*/
       }
    }
 

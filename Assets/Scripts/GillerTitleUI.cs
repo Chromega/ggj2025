@@ -16,7 +16,7 @@ public class GillerTitleUI : MonoBehaviour
    {
       //RoomCode.text = GillerNetworkMgr.I.RoomCode;
 
-      GillerNetworkMgr.I.OnConnectionStateChanged.AddListener(OnConnectionStateChanged);
+      GillerNetworkMgr.OnConnectionStateChanged.AddListener(OnConnectionStateChanged);
 
       if (CurrentPlayer.ReadOnlyTags().Contains("2Local") || !string.IsNullOrEmpty(GillerSceneMgr.sTestScene))
       {
@@ -40,16 +40,13 @@ public class GillerTitleUI : MonoBehaviour
          GillerNetworkMgr.I.RoomCode = SystemInfo.deviceName;
          OnNetworkMultiplayerPressed();
       }
-
-      OnConnectionStateChanged();
+      DisconnectedRoot.SetActive(true);
+      ConnectingRoot.SetActive(false);
    }
 
    private void OnDestroy()
    {
-      if (GillerNetworkMgr.I)
-      {
-         GillerNetworkMgr.I.OnConnectionStateChanged.RemoveListener(OnConnectionStateChanged);
-      }
+      GillerNetworkMgr.OnConnectionStateChanged.RemoveListener(OnConnectionStateChanged);
    }
 
    public void OnLocalMultiplayerPressed()

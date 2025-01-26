@@ -20,7 +20,7 @@ public class GillerNetworkMgr : MonoBehaviour
    public NetworkTransport LocalEditorTransport;
    public NetworkTransport OnlineTransport;
 
-   public UnityEvent OnConnectionStateChanged;
+   public static UnityEvent OnConnectionStateChanged = new UnityEvent();
 
    public enum ConnectionState
    {
@@ -193,6 +193,8 @@ public class GillerNetworkMgr : MonoBehaviour
       {
          await m_Session.LeaveAsync();
       }
+
+      NetworkManager.Singleton.Shutdown();
 
       State = ConnectionState.Disconnected;
    }
