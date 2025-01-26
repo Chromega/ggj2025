@@ -79,8 +79,8 @@ public class Eel : NetworkBehaviour
          GillerPlayer bestPlayer = _targetPlayer;
          foreach (GillerPlayer player in GillerPlayerMgr.I.GetPlayers())
          {
-            Vector3 displacement = player.transform.position - transform.position;
-            float distance = displacement.magnitude;
+            //Vector3 displacement = player.transform.position - transform.position;
+            float distance = Mathf.Abs(player.transform.position.x - transform.position.x);
             if (distance < bestDistance)
             {
                bestDistance = distance;
@@ -98,7 +98,7 @@ public class Eel : NetworkBehaviour
             Vector3 displacement = (_targetPlayer.transform.position - transform.position);
             displacement.x *= _isMirrored ? -1 : 1;
             targetPitch = Mathf.Atan2(displacement.y, displacement.x) * Mathf.Rad2Deg;
-            targetPitch += 10;
+            //targetPitch += 10;
             targetJaw = .5f;
 
             if (bestDistance < AttackRange && !stillAttacking)
