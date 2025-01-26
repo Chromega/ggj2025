@@ -5718,7 +5718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1763247632
+  GlobalObjectIdHash: 1527084750
   InScenePlacedSourceGlobalObjectIdHash: 1527084750
   DeferredDespawnTick: 0
   Ownership: 0
@@ -5786,9 +5786,11 @@ MonoBehaviour:
   InflatedResponsiveness: 0.95
   LimpMovementSpeed: 6
   LimpResponsiveness: 0.7
-  BreathRegenDelay: 1.06
-  BreathRegenTimePerSegment: 0.6
+  BreathRegenDelay: 1.1
+  BreathRegenTimePerSegment: 1.4
   InflationDecayTimePerSegment: 1.5
+  PushConstant: 45
+  PushStunTime: 0.05
   FishAnimator: {fileID: 1984062336244242028}
   collider: {fileID: 1267946642722879174}
   FishRoot: {fileID: 5577957703099878422}
