@@ -6,6 +6,7 @@ public class GillerGameAudioMgr : MonoBehaviour
 {
    public FMODUnity.StudioEventEmitter BattleBgmEmitter;
    public FMODUnity.StudioGlobalParameterTrigger GlobalParameter;
+   public FMODUnity.StudioEventEmitter VictoryBgmEmitter;
 
    // Start is called once before the first execution of Update after the MonoBehaviour is created
    void Start()
@@ -18,6 +19,11 @@ public class GillerGameAudioMgr : MonoBehaviour
       if (state == GillerGameMgr.GameState.Playing)
       {
          SafePlay(BattleBgmEmitter);
+      }
+      else if (state == GillerGameMgr.GameState.GameOver)
+      {
+         try { BattleBgmEmitter.Stop(); } catch { }
+         SafePlay(VictoryBgmEmitter);
       }
    }
 
