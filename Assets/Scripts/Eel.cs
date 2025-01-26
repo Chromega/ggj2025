@@ -16,13 +16,13 @@ public class Eel : NetworkBehaviour
 
    [SerializeField]
    float TimeBetweenAttacks = 2.0f;
-   
+
    [SerializeField]
    float EmergeWaitTime = 0.5f;
-   
+
    [SerializeField]
    float LookAtRange = 30f;
-   
+
    [SerializeField]
    float AttackRange = 18f;
 
@@ -75,6 +75,18 @@ public class Eel : NetworkBehaviour
    {
       if (IsOwner && emerged)
       {
+
+         if (GillerGameMgr.I.GetGameState() == GillerGameMgr.GameState.GameOver)
+         {
+            if (GillerPlayerMgr.I.GetPlayers().Count > 0)
+            {
+               Vector3 pos = transform.localPosition;
+               pos.x += 5f * Time.deltaTime * (_isMirrored ? -1 : 1);
+               transform.localPosition = pos;
+            }
+         }
+
+
          float bestDistance = Mathf.Infinity;
          GillerPlayer bestPlayer = _targetPlayer;
          foreach (GillerPlayer player in GillerPlayerMgr.I.GetPlayers())
