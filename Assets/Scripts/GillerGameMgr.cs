@@ -87,6 +87,12 @@ public class GillerGameMgr : NetworkBehaviour
    {
       Debug.Log("Spawned");
       _state.OnValueChanged += OnChangeState;
+      StartCoroutine(DoSpawnPlayers());
+   }
+
+   IEnumerator DoSpawnPlayers()
+   {
+      yield return new WaitForSeconds(1f);
 
       GillerPlayerMgr.I.SpawnPlayers();
    }

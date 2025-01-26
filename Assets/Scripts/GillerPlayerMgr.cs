@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class GillerPlayerMgr : Singleton<GillerPlayerMgr>
    List<GillerPlayer> _localPlayers = new List<GillerPlayer>();
 
    public GillerPlayer PlayerPrefab;
+
+   bool readyToSpawn = false;
 
    public void RegisterPlayer(GillerPlayer player)
    {
@@ -58,6 +61,8 @@ public class GillerPlayerMgr : Singleton<GillerPlayerMgr>
 
    public void SpawnPlayers()
    {
+      readyToSpawn = true;
+
       List<GillerPlayerInput> playerInputs = GillerInputMgr.I.GetPlayerInputs();
       int playersToSpawn = playerInputs.Count;
       if (playersToSpawn < 1) playersToSpawn = 1;
@@ -71,6 +76,9 @@ public class GillerPlayerMgr : Singleton<GillerPlayerMgr>
 
    public void OnPlayerInputAdded(GillerPlayerInput input)
    {
+      if (!readyToSpawn) 
+         return;
+
       UpdateInputAssignments();
       if (input.Player == null)
       {
