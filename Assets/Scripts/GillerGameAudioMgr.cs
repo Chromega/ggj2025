@@ -1,6 +1,7 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GillerGameAudioMgr : MonoBehaviour
 {
@@ -39,7 +40,9 @@ public class GillerGameAudioMgr : MonoBehaviour
       int playerCount = GillerPlayerMgr.I.GetPlayers().Count;
       int targetIntensity = 5 - playerCount;
       targetIntensity = Mathf.Clamp(targetIntensity, 1, 3);
+      //GlobalParameter.Value = targetIntensity;
 
-      GlobalParameter.Value = targetIntensity;
+      FMODUnity.RuntimeManager.StudioSystem.setParameterByName("MX_Layering_Intensity", targetIntensity);
+
    }
 }
