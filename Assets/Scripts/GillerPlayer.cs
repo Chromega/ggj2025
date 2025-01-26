@@ -426,7 +426,14 @@ public class GillerPlayer : NetworkBehaviour
    private void SceneManager_OnUnload(ulong clientId, string sceneName, AsyncOperation asyncOperation)
    {
       if (IsOwner)
-         NetworkObject.Despawn(true);
+         StartCoroutine(DelayedDespawn(asyncOperation));
+   }
+
+   IEnumerator DelayedDespawn(AsyncOperation asyncOperation)
+   {
+      yield return new WaitUntil(() => { return asyncOperation.isDone; });
+      yield return new WaitForSeconds(1.0f);
+      NetworkObject.Despawn(true);
    }
 
    private void OnCollisionEnter(Collision collision)
