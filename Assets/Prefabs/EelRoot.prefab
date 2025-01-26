@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2681135564
+  GlobalObjectIdHash: 3291894213
   InScenePlacedSourceGlobalObjectIdHash: 3291894213
   DeferredDespawnTick: 0
   Ownership: 1
@@ -100,6 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  TimeBetweenAttacks: 1.5
+  EmergeWaitTime: 0.75
+  LookAtRange: 30
+  AttackRange: 19.58
   BreakableWall: {fileID: 0}
   ChompEmitter: {fileID: 2378996034640815017}
   WallBreakEmitter: {fileID: 7635341954621836730}
