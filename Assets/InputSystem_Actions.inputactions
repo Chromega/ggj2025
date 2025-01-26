@@ -177,19 +177,8 @@
                 },
                 {
                     "name": "",
-                    "id": "b3c1c7f0-bd20-4ee7-a0f1-899b24bca6d7",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard WASD",
-                    "action": "BlowWater",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "5ba3ae4a-79f9-4810-8635-e65d3dbde483",
-                    "path": "<Keyboard>/numpad0",
+                    "path": "<Keyboard>/rightShift",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard Arrows",
@@ -199,12 +188,12 @@
                 },
                 {
                     "name": "",
-                    "id": "d47f1d37-9a20-4c6e-9a35-fda095998d00",
-                    "path": "<Keyboard>/q",
+                    "id": "56bf1ebc-2172-4cea-9a0c-9e176f2b4453",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard WASD",
-                    "action": "Inflate",
+                    "action": "BlowWater",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -226,6 +215,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
+                    "action": "Inflate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2484ab5e-b79f-4c03-bad9-a3d102a5bb58",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard WASD",
                     "action": "Inflate",
                     "isComposite": false,
                     "isPartOfComposite": false
