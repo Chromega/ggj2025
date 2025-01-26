@@ -14,7 +14,17 @@ public class Eel : NetworkBehaviour
    bool emerged;
    float _timeSinceLastAttack = 999f;
 
+   [SerializeField]
    float TimeBetweenAttacks = 2.0f;
+   
+   [SerializeField]
+   float EmergeWaitTime = 0.5f;
+   
+   [SerializeField]
+   float LookAtRange = 30f;
+   
+   [SerializeField]
+   float AttackRange = 18f;
 
    bool _isMirrored;
    public GameObject BreakableWall;
@@ -56,7 +66,7 @@ public class Eel : NetworkBehaviour
       }
       GillerGameAudioMgr.SafePlay(WallBreakEmitter);
 
-      yield return new WaitForSeconds(3.0f);
+      yield return new WaitForSeconds(EmergeWaitTime);
       emerged = true;
    }
 
@@ -83,7 +93,7 @@ public class Eel : NetworkBehaviour
          float targetPitch = 0;
          float targetJaw = 0f;
          bool stillAttacking = _timeSinceLastAttack < TimeBetweenAttacks;
-         if (_targetPlayer && bestDistance < 30f)
+         if (_targetPlayer && bestDistance < LookAtRange)
          {
             Vector3 displacement = (_targetPlayer.transform.position - transform.position);
             displacement.x *= _isMirrored ? -1 : 1;
@@ -91,7 +101,7 @@ public class Eel : NetworkBehaviour
             targetPitch += 10;
             targetJaw = .5f;
 
-            if (bestDistance < 15f && !stillAttacking)
+            if (bestDistance < AttackRange && !stillAttacking)
             {
                targetJaw = 1f;
                _networkAnimator.SetTrigger("Attack");
