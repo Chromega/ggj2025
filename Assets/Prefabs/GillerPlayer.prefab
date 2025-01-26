@@ -5718,7 +5718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1527084750
+  GlobalObjectIdHash: 1763247632
   InScenePlacedSourceGlobalObjectIdHash: 1527084750
   DeferredDespawnTick: 0
   Ownership: 0
@@ -5793,6 +5793,7 @@ MonoBehaviour:
   PushStunTime: 0.1
   SpikeDamageValue: 3
   FishAnimator: {fileID: 1984062336244242028}
+  FishNetAnimator: {fileID: 6303463960126907359}
   collider: {fileID: 1267946642722879174}
   FishRoot: {fileID: 5577957703099878422}
   SpikeRoot: {fileID: 2048541778376097406}
@@ -6799,7 +6800,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  TransitionStateInfoList: []
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -1495575208
+    DestinationState: 2014187548
+    TransitionDuration: 0.1
+    TriggerNameHash: -1090111034
+    TransitionIndex: 0
   m_Animator: {fileID: 1984062336244242028}
 --- !u!114 &1192884204998442357
 MonoBehaviour:

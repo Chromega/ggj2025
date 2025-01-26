@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
 using UnityEngine.InputSystem.LowLevel;
+using Unity.Netcode.Components;
 
 public class GillerPlayer : NetworkBehaviour
 {
@@ -62,6 +63,9 @@ public class GillerPlayer : NetworkBehaviour
 
    [SerializeField]
    Animator FishAnimator;
+
+   [SerializeField]
+   NetworkAnimator FishNetAnimator;
 
    [SerializeField]
    new Collider collider;
@@ -159,6 +163,7 @@ public class GillerPlayer : NetworkBehaviour
       collider.transform.localScale = 2 * Vector3.one;
       _audioSource = GetComponent<AudioSource>();
 
+      GillerGameMgr.I.OnGameStateChanged.AddListener(OnGameStateChanged);
 
       NetworkManager.SceneManager.OnUnload += SceneManager_OnUnload;
    }
@@ -568,5 +573,17 @@ public class GillerPlayer : NetworkBehaviour
 
       if (NetworkManager!=null && NetworkManager.SceneManager!=null)
          NetworkManager.SceneManager.OnUnload -= SceneManager_OnUnload;
+
+      if (GillerGameMgr.I)
+         GillerGameMgr.I.OnGameStateChanged.RemoveListener(OnGameStateChanged);
+   }
+
+   void OnGameStateChanged(GillerGameMgr.GameState state)
+   {
+      if (state == GillerGameMgr.GameState.GameOver)
+      {
+         FishNetAnimator.SetTrigger("Victory");
+         _targetYaw = 90;
+      }
    }
 }
