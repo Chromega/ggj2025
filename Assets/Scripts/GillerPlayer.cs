@@ -49,6 +49,15 @@ public class GillerPlayer : NetworkBehaviour
    
    [SerializeField]
    float InflationDecayTimePerSegment = 1.2f;
+   
+   [SerializeField]
+   float PushConstant = 45f;
+   
+   [SerializeField]
+   float PushStunTime = .05f;
+   
+   [SerializeField]
+   float SpikeDamageValue = 2f;
 
 
    [SerializeField]
@@ -381,7 +390,7 @@ public class GillerPlayer : NetworkBehaviour
    void ReceivePushRpc(Vector3 source)
    {
       Debug.Log("Get pushed");
-      _rigidbody.linearVelocity = (transform.position - source).normalized * 20f;
+      _rigidbody.linearVelocity = (transform.position - source).normalized * (1.0f/Mathf.Max((transform.position - source).magnitude, .1f)) * PushConstant;
       if (_getPushedCoroutine != null)
          StopCoroutine(_getPushedCoroutine);
       _getPushedCoroutine = StartCoroutine(DoReceivePush());
@@ -390,7 +399,7 @@ public class GillerPlayer : NetworkBehaviour
    IEnumerator DoReceivePush()
    {
       _isBeingPushed = true;
-      yield return new WaitForSeconds(.5f);
+      yield return new WaitForSeconds(PushStunTime);
       _isBeingPushed = false;
    }
 
@@ -431,7 +440,7 @@ public class GillerPlayer : NetworkBehaviour
 
    IEnumerator DelayedDespawn(AsyncOperation asyncOperation)
    {
-      yield return new WaitUntil(() => { return asyncOperation.isDone; });
+      //yield return new WaitUntil(() => { return asyncOperation.isDone; });
       yield return new WaitForSeconds(1.0f);
       NetworkObject.Despawn(true);
    }
@@ -455,9 +464,9 @@ public class GillerPlayer : NetworkBehaviour
    [Rpc(SendTo.Owner)]
    void ReceiveSpikedHitRpc(NetworkObjectReference source)
    {
-      if (_state.Value != State.Inflated && IsHurt == false)
+      if (_state.Value != State.Limp && IsHurt == false)
       {
-         TakeDamage(1f);
+         TakeDamage(SpikeDamageValue);
          ChangeColorTemporarilyRpc();
       }
    }

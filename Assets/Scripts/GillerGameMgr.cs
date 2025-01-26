@@ -125,7 +125,7 @@ public class GillerGameMgr : NetworkBehaviour
       else if (_state.Value == GameState.Playing)
       {
          int victoryPlayers = (playersAtStart > 1) ? 1 : 0;
-         if (GillerPlayerMgr.I.GetPlayers().Count <= victoryPlayers)
+         if (IsOwner && GillerPlayerMgr.I.GetPlayers().Count <= victoryPlayers)
          {
             _state.Value = GameState.GameOver;
          }

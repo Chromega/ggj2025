@@ -28,6 +28,8 @@ public class GillerGameAudioMgr : MonoBehaviour
 
    void Update()
    {
+      if (!GillerPlayerMgr.I)
+         return;
       int playerCount = GillerPlayerMgr.I.GetPlayers().Count;
       int targetIntensity = 5 - playerCount;
       targetIntensity = Mathf.Clamp(targetIntensity, 1, 3);
