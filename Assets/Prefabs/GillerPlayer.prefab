@@ -5781,12 +5781,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   NormalMovementSpeed: 10
-  NormalResponsiveness: 0.9
+  NormalResponsiveness: 0.8
   InflatedMovementSpeed: 2.5
-  InflatedResponsiveness: 0.5
-  LimpMovementSpeed: 5
-  LimpResponsiveness: 0.75
-  BreathRegenDelay: 1
+  InflatedResponsiveness: 0.95
+  LimpMovementSpeed: 6
+  LimpResponsiveness: 0.7
+  BreathRegenDelay: 1.06
   BreathRegenTimePerSegment: 0.6
   InflationDecayTimePerSegment: 1.5
   FishAnimator: {fileID: 1984062336244242028}
