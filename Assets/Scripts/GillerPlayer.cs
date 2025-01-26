@@ -499,6 +499,20 @@ public class GillerPlayer : NetworkBehaviour
       }
    }
 
+
+    public void RaiseBreath(float amount)
+    {
+        if (IsOwner)
+        {
+            float newBreath = _breath.Value + amount;
+            if (newBreath > kMaxBreath)
+            {
+                newBreath = kMaxBreath;
+            }
+            _breath.Value = newBreath;
+        }
+    }
+
    private IEnumerator ChangeMaterialCoroutine()
    {
       Material[] materials = FishRenderer.materials;
