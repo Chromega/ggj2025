@@ -284,7 +284,7 @@ public class GillerPlayer : NetworkBehaviour
          }
       }
 
-      float targetSpikeScale = _state.Value == State.Inflated ? 100 : 0;
+      float targetSpikeScale = _state.Value == State.Inflated ? 3.5f : 0;
       float currentSpikeScale = SpikeRoot.transform.localScale.x;
       SpikeRoot.transform.localScale = Mathf.MoveTowards(currentSpikeScale, targetSpikeScale, 500.0f * Time.deltaTime) * Vector3.one;
 
