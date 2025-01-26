@@ -14,6 +14,8 @@ public class GillerGameUI : MonoBehaviour
    public FMODUnity.StudioEventEmitter countSfx0;
    public Animator animator;
 
+   public Color[] winnerColors;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,6 +32,35 @@ public class GillerGameUI : MonoBehaviour
       if (state == GillerGameMgr.GameState.Countdown)
       {
          StartCoroutine(DoStartCountdown());
+      }
+      else if (state == GillerGameMgr.GameState.GameOver)
+      {
+         int winner = GillerGameMgr.I.winner.Value;
+         if (winner < 0)
+         {
+            gameOverLabel.text = "NO WINNER";
+            gameOverLabel.color = Color.black;
+         }
+         else if (winner == 0)
+         {
+            gameOverLabel.text = "GREEN WINS!";
+            gameOverLabel.color = winnerColors[0];
+         }
+         else if (winner == 1)
+         {
+            gameOverLabel.text = "YELLOW WINS!";
+            gameOverLabel.color = winnerColors[1];
+         }
+         else if (winner == 2)
+         {
+            gameOverLabel.text = "ORANGE WINS!";
+            gameOverLabel.color = winnerColors[2];
+         }
+         else if (winner == 3)
+         {
+            gameOverLabel.text = "PINK WINS!";
+            gameOverLabel.color = winnerColors[3];
+         }
       }
       RefreshUI();
    }

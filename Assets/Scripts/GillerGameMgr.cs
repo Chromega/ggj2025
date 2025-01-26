@@ -13,6 +13,7 @@ public class GillerGameMgr : NetworkBehaviour
    public static GillerGameMgr I { get; private set; }
 
 
+   public NetworkVariable<int> winner = new NetworkVariable<int>(-1);
    NetworkVariable<int> playerCount = new NetworkVariable<int>(0);
    const int kMaxPlayers = 4;
    int playersAtStart;
@@ -127,6 +128,10 @@ public class GillerGameMgr : NetworkBehaviour
          int victoryPlayers = (playersAtStart > 1) ? 1 : 0;
          if (IsOwner && GillerPlayerMgr.I.GetPlayers().Count <= victoryPlayers)
          {
+            if (GillerPlayerMgr.I.GetPlayers().Count > 0)
+            {
+               winner.Value = GillerPlayerMgr.I.GetPlayers()[0]._playerIdx.Value;
+            }
             _state.Value = GameState.GameOver;
          }
       }
