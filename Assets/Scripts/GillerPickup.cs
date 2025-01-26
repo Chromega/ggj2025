@@ -1,14 +1,18 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class GillerPickup : MonoBehaviour
+public class GillerPickup : NetworkBehaviour
 {
     
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        GillerPlayer otherPlayer = other.gameObject.GetComponentInParent<GillerPlayer>();
-        if (otherPlayer != null )
+        if (other.GetComponent<Collider>().isTrigger)
+            return;
+        GillerPlayer gp = other.GetComponent<Collider>().GetComponentInParent<GillerPlayer>();
+        if (gp && gp.IsOwner)
         {
-            Destroy(gameObject);
+            gp.RaiseBreath(1);
+            NetworkObject.Despawn(true);
         }
     }
 
