@@ -8,12 +8,15 @@ public class GillerTitleUI : MonoBehaviour
    [SerializeField]
    TMPro.TMP_InputField RoomCode;
 
+   public GameObject DisconnectedRoot;
+   public GameObject ConnectingRoot;
+
    // Start is called once before the first execution of Update after the MonoBehaviour is created
    void Start()
    {
       //RoomCode.text = GillerNetworkMgr.I.RoomCode;
 
-      GillerNetworkMgr.I.OnConnectionStateChanged.AddListener(OnConnectionStateChanged);
+      GillerNetworkMgr.OnConnectionStateChanged.AddListener(OnConnectionStateChanged);
 
       if (CurrentPlayer.ReadOnlyTags().Contains("2Local") || !string.IsNullOrEmpty(GillerSceneMgr.sTestScene))
       {
@@ -37,14 +40,13 @@ public class GillerTitleUI : MonoBehaviour
          GillerNetworkMgr.I.RoomCode = SystemInfo.deviceName;
          OnNetworkMultiplayerPressed();
       }
+      DisconnectedRoot.SetActive(true);
+      ConnectingRoot.SetActive(false);
    }
 
    private void OnDestroy()
    {
-      if (GillerNetworkMgr.I)
-      {
-         GillerNetworkMgr.I.OnConnectionStateChanged.RemoveListener(OnConnectionStateChanged);
-      }
+      GillerNetworkMgr.OnConnectionStateChanged.RemoveListener(OnConnectionStateChanged);
    }
 
    public void OnLocalMultiplayerPressed()
@@ -64,6 +66,7 @@ public class GillerTitleUI : MonoBehaviour
 
    void OnConnectionStateChanged()
    {
-      gameObject.SetActive(GillerNetworkMgr.I.State == GillerNetworkMgr.ConnectionState.Disconnected);
+      DisconnectedRoot.SetActive(GillerNetworkMgr.I.State == GillerNetworkMgr.ConnectionState.Disconnected);
+      ConnectingRoot.SetActive(GillerNetworkMgr.I.State != GillerNetworkMgr.ConnectionState.Disconnected);
    }
 }

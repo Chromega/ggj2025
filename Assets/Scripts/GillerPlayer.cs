@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
 using UnityEngine.InputSystem.LowLevel;
+using Unity.Netcode.Components;
 
 public class GillerPlayer : NetworkBehaviour
 {
@@ -49,10 +50,22 @@ public class GillerPlayer : NetworkBehaviour
    
    [SerializeField]
    float InflationDecayTimePerSegment = 1.2f;
+   
+   [SerializeField]
+   float PushConstant = 45f;
+   
+   [SerializeField]
+   float PushStunTime = .05f;
+   
+   [SerializeField]
+   float SpikeDamageValue = 2f;
 
 
    [SerializeField]
    Animator FishAnimator;
+
+   [SerializeField]
+   NetworkAnimator FishNetAnimator;
 
    [SerializeField]
    new Collider collider;
@@ -150,6 +163,7 @@ public class GillerPlayer : NetworkBehaviour
       collider.transform.localScale = 2 * Vector3.one;
       _audioSource = GetComponent<AudioSource>();
 
+      GillerGameMgr.I.OnGameStateChanged.AddListener(OnGameStateChanged);
 
       NetworkManager.SceneManager.OnUnload += SceneManager_OnUnload;
    }
@@ -284,7 +298,7 @@ public class GillerPlayer : NetworkBehaviour
          }
       }
 
-      float targetSpikeScale = _state.Value == State.Inflated ? 100 : 0;
+      float targetSpikeScale = _state.Value == State.Inflated ? 3.5f : 0;
       float currentSpikeScale = SpikeRoot.transform.localScale.x;
       SpikeRoot.transform.localScale = Mathf.MoveTowards(currentSpikeScale, targetSpikeScale, 500.0f * Time.deltaTime) * Vector3.one;
 
@@ -381,7 +395,7 @@ public class GillerPlayer : NetworkBehaviour
    void ReceivePushRpc(Vector3 source)
    {
       Debug.Log("Get pushed");
-      _rigidbody.linearVelocity = (transform.position - source).normalized * 20f;
+      _rigidbody.linearVelocity = (transform.position - source).normalized * (1.0f/Mathf.Max((transform.position - source).magnitude, .1f)) * PushConstant;
       if (_getPushedCoroutine != null)
          StopCoroutine(_getPushedCoroutine);
       _getPushedCoroutine = StartCoroutine(DoReceivePush());
@@ -390,7 +404,7 @@ public class GillerPlayer : NetworkBehaviour
    IEnumerator DoReceivePush()
    {
       _isBeingPushed = true;
-      yield return new WaitForSeconds(.5f);
+      yield return new WaitForSeconds(PushStunTime);
       _isBeingPushed = false;
    }
 
@@ -426,7 +440,14 @@ public class GillerPlayer : NetworkBehaviour
    private void SceneManager_OnUnload(ulong clientId, string sceneName, AsyncOperation asyncOperation)
    {
       if (IsOwner)
-         NetworkObject.Despawn(true);
+         StartCoroutine(DelayedDespawn(asyncOperation));
+   }
+
+   IEnumerator DelayedDespawn(AsyncOperation asyncOperation)
+   {
+      //yield return new WaitUntil(() => { return asyncOperation.isDone; });
+      yield return new WaitForSeconds(1.0f);
+      NetworkObject.Despawn(true);
    }
 
    private void OnCollisionEnter(Collision collision)
@@ -448,9 +469,9 @@ public class GillerPlayer : NetworkBehaviour
    [Rpc(SendTo.Owner)]
    void ReceiveSpikedHitRpc(NetworkObjectReference source)
    {
-      if (_state.Value != State.Inflated && IsHurt == false)
+      if (_state.Value != State.Limp && IsHurt == false)
       {
-         TakeDamage(1f);
+         TakeDamage(SpikeDamageValue);
          ChangeColorTemporarilyRpc();
       }
    }
@@ -499,6 +520,20 @@ public class GillerPlayer : NetworkBehaviour
       }
    }
 
+
+    public void RaiseBreath(float amount)
+    {
+        if (IsOwner)
+        {
+            float newBreath = _breath.Value + amount;
+            if (newBreath > kMaxBreath)
+            {
+                newBreath = kMaxBreath;
+            }
+            _breath.Value = newBreath;
+        }
+    }
+
    private IEnumerator ChangeMaterialCoroutine()
    {
       Material[] materials = FishRenderer.materials;
@@ -538,5 +573,17 @@ public class GillerPlayer : NetworkBehaviour
 
       if (NetworkManager!=null && NetworkManager.SceneManager!=null)
          NetworkManager.SceneManager.OnUnload -= SceneManager_OnUnload;
+
+      if (GillerGameMgr.I)
+         GillerGameMgr.I.OnGameStateChanged.RemoveListener(OnGameStateChanged);
+   }
+
+   void OnGameStateChanged(GillerGameMgr.GameState state)
+   {
+      if (state == GillerGameMgr.GameState.GameOver)
+      {
+         FishNetAnimator.SetTrigger("Victory");
+         _targetYaw = 90;
+      }
    }
 }

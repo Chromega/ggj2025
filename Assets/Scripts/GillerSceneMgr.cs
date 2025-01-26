@@ -10,8 +10,14 @@ public class GillerSceneMgr : Singleton<GillerSceneMgr>
 
    private void Start()
    {
-      GillerNetworkMgr.I.OnConnectionStateChanged.AddListener(OnConnectionStateChanged);
+      GillerNetworkMgr.OnConnectionStateChanged.AddListener(OnConnectionStateChanged);
       OnConnectionStateChanged();
+   }
+
+   protected override void OnDestroy()
+   {
+      base.OnDestroy();
+      GillerNetworkMgr.OnConnectionStateChanged.RemoveListener(OnConnectionStateChanged);
    }
 
    /*private void Update()

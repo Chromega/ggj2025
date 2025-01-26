@@ -19,8 +19,9 @@ public class GillerNetworkMgr : MonoBehaviour
 
    public NetworkTransport LocalEditorTransport;
    public NetworkTransport OnlineTransport;
+   public NetworkTransport PCTransport;
 
-   public UnityEvent OnConnectionStateChanged;
+   public static UnityEvent OnConnectionStateChanged = new UnityEvent();
 
    public enum ConnectionState
    {
@@ -78,7 +79,6 @@ public class GillerNetworkMgr : MonoBehaviour
       StartNetworkSession();
 #else
       LocalEditorTransport.enabled = true;
-      OnlineTransport.enabled = false;
       NetworkManager.NetworkConfig.NetworkTransport = LocalEditorTransport;
       StartLocalSessionAsync(RoomCode, UnityEngine.Random.Range(0, 1000000000).ToString());
 #endif
@@ -86,13 +86,14 @@ public class GillerNetworkMgr : MonoBehaviour
 
    public async void StartNetworkSession()
    {
-#if UNITY_WEBGL && !UNITY_EDITOR
-      LocalEditorTransport.enabled = false;
+#if !UNITY_WEBGL
+      PCTransport.enabled = true;
+      NetworkManager.NetworkConfig.NetworkTransport = PCTransport;
+#elif !UNITY_EDITOR
       OnlineTransport.enabled = true;
       NetworkManager.NetworkConfig.NetworkTransport = OnlineTransport;
 #else
       LocalEditorTransport.enabled = true;
-      OnlineTransport.enabled = false;
       NetworkManager.NetworkConfig.NetworkTransport = LocalEditorTransport;
 #endif
       await CreateOrJoinSessionAsync(RoomCode, UnityEngine.Random.Range(0, 1000000000).ToString());
@@ -193,6 +194,8 @@ public class GillerNetworkMgr : MonoBehaviour
       {
          await m_Session.LeaveAsync();
       }
+
+      NetworkManager.Singleton.Shutdown();
 
       State = ConnectionState.Disconnected;
    }
