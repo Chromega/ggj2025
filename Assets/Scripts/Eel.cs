@@ -81,7 +81,7 @@ public class Eel : NetworkBehaviour
             if (GillerPlayerMgr.I.GetPlayers().Count > 0)
             {
                Vector3 pos = transform.localPosition;
-               pos.x += 5f * Time.deltaTime * (_isMirrored ? -1 : 1);
+               pos.x += 3f * Time.deltaTime * (_isMirrored ? -1 : 1);
                transform.localPosition = pos;
             }
          }
